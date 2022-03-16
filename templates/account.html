@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block body %}
+
+<!-- Breadcrumb -->
+<div id="breadcrumb">
+    <div class="container">
+        <h2 class="title">User Profile</h2>
+        
+        <ul class="breadcrumb">
+            <li><a href="{% url 'index' %}" title="Home">Home</a></li>
+            <li><span>My Account</span></li>
+        </ul>
+    </div>
+</div>
+
+
+{% endblock body %}

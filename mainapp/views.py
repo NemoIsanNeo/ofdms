@@ -32,3 +32,15 @@ def register(request):
         else:
             print('Nothing')
     return render(request, 'register.html')
+
+
+def account(request):
+    return render(request, 'account.html')
+
+
+def cart_details(request):
+    return render(request, 'cart_details.html')
+
+
+def checkout(request):
+    return render(request, 'checkout.html')

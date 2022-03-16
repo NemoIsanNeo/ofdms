@@ -119,8 +119,7 @@
 															<ul>
 																<li><a href="{% url 'login' %}" title="Login">Login</a></li>
 																<li><a href="{% url 'register' %}" title="Register">Register</a></li>
-																<li><a href="#" title="My Account">My Account</a></li>
-																<li><a href="#" title="My Wishlists">My Wishlists</a></li>
+																<li><a href="{% url 'account' %}" title="My Account">My Account</a></li>
 															</ul>
 														</div>
 													</li>
@@ -238,8 +237,8 @@
 													<tr>
 														<td colspan="3">
 															<div class="cart-button">
-																<a class="btn btn-primary" href="product-cart.html" title="View Cart">View Cart</a>
-																<a class="btn btn-primary" href="product-checkout.html" title="Checkout">Checkout</a>
+																<a class="btn btn-primary" href="{%url 'cart_details'%}" title="View Cart">View Cart</a>
+																<a class="btn btn-primary" href="{% url 'checkout' %}" title="Checkout">Checkout</a>
 															</div>
 														</td>
 													</tr>
@@ -257,7 +256,7 @@
 									</div>
 									<div class="dropdown-menu">										
 										<div class="item">
-											<a href="#" title="Log in to your customer account"><i class="fa fa-cog"></i>My Account</a>
+											<a href="{% url 'account' %}" title="User Account Details"><i class="fa fa-cog"></i>My Account</a>
 										</div>
 										<div class="item">
 											<a href="{% url 'login' %}" title="Log in to your customer account"><i class="fa fa-sign-in"></i>Login</a>
