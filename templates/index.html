@@ -51,7 +51,7 @@
 								<div id="main-menu">
 									<ul class="menu">
 										<li class="dropdown">
-											<a href="" title="Homepage">Home</a>
+											<a href="{% url 'index' %}" title="Homepage">Home</a>
 										</li>
 										
 										<li class="dropdown">
@@ -158,7 +158,7 @@
 							<div class="col-lg-2 col-md-2 col-sm-12 header-center justify-content-center">
 								<!-- Logo -->		
 								<div class="logo">
-									<a href="index.html">
+									<a href="{% url 'index' %}">
 										<img class="img-responsive" src="{% static 'img/logo.png' %}" alt="Logo">
 									</a>
 								</div>

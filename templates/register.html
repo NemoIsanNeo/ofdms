@@ -2,7 +2,19 @@
 {% load static %}
 
 {% block body %}
-<br><br><br><br>
+<div id="content" class="site-content">
+    <!-- Breadcrumb -->
+    <div id="breadcrumb">
+        <div class="container">
+            <h2 class="title">Create Account</h2>
+            
+            <ul class="breadcrumb">
+                <li><a href="{% url 'index' %}}" title="Home">Home</a></li>
+                <li><span>Register</span></li>
+            </ul>
+        </div>
+    </div>
+
     <div class="container">
         <div class="register-page">
             <div class="register-form form">
@@ -43,12 +55,6 @@
                     
                     <div class="form-group text-center">
                         <input type="submit" class="btn btn-primary" value="Create Account">
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
                     </div>
                 </form>
             </div>
@@ -58,5 +64,7 @@
 <div>
 
 </div>
-
+<br>
+<br>
+<br>
 {% endblock body %}
