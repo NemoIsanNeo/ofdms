@@ -7,10 +7,10 @@
 		<!-- Basic Page Needs -->
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>FreshMart - Organic, Fresh Food, Farm Store HTML Template</title>
+		<title>OFDMS</title>
 		
-		<meta name="keywords" content="Organic, Fresh Food, Farm Store">
-		<meta name="description" content="FreshMart - Organic, Fresh Food, Farm Store HTML Template">
+		<meta name="keywords" content="Organic, Fresh Food">
+		<meta name="description" content="OFDMS - Organic, Fresh Food">
 		<meta name="author" content="tivatheme">
 		
 		<!-- Favicon -->
@@ -55,63 +55,54 @@
 										</li>
 										
 										<li class="dropdown">
-											<a href="product-grid-left-sidebar.html" title="Product">Product</a>
+											<a href="" title="Food Lists">Food Lists</a>
 											<div class="dropdown-menu">
 												<ul>
 													<li class="has-image">
 														<img src="{% static 'img/product/product-category-1.png' %}" alt="Product Category Image">
 														<a href="product-grid-left-sidebar.html" title="Vegetables">Vegetables</a>
 													</li>
-													<li class="has-image">
-														<img src="{% static 'img/product/product-category-2.png' %}" alt="Product Category Image">
-														<a href="product-grid-left-sidebar.html" title="Fruits">Fruits</a>
-													</li>
+
 													<li class="has-image">
 														<img src="{% static 'img/product/product-category-3.png' %}" alt="Product Category Image">
 														<a href="product-grid-left-sidebar.html" title="Bread">Bread</a>
 													</li>
+
+													<li class="has-image">
+														<img src="{% static 'img/product/product-category-2.png' %}" alt="Product Category Image">
+														<a href="" title="Fruits and Vegetables">Fruits and Vegetables</a>
+													</li>
+													
 													<li class="has-image">
 														<img src="{% static 'img/product/product-category-4.png' %}" alt="Product Category Image">
-														<a href="product-grid-left-sidebar.html" title="Juices">Juices</a>
+														<a href="" title="Drinks">Drinks</a>
 													</li>
-													<li class="has-image">
-														<img src="{% static 'img/product/product-category-5.png' %}" alt="Product Category Image">
-														<a href="product-grid-left-sidebar.html" title="Tea and coffee">Tea and coffee</a>
-													</li>
+													
 												</ul>
 											</div>
 										</li>
 										
 										<li class="dropdown">
-											<a href="#" title="Page">Page</a>
+											<a href="#" title="Menu">Menu</a>
 											<div class="dropdown-menu">
 												<ul>
 													<li class="dropdown-submenu">
-														<a href="product-grid-left-sidebar.html" title="Product List">Product List</a>
+														<a href="" title="Food Catagory">Food Catagory</a>
 														<div class="dropdown-menu level2">
 															<ul>
-																<li><a href="product-grid-left-sidebar.html" title="Product Grid - Left Sidebar">Product Grid - Left Sidebar</a></li>
-																<li><a href="product-grid-right-sidebar.html" title="Product Grid - Right Sidebar">Product Grid - Right Sidebar</a></li>
-																<li><a href="product-grid-full-width.html" title="Product Grid - Full Width">Product Grid - Full Width</a></li>
-																<li><a href="product-list-left-sidebar.html" title="Product List - Left Sidebar">Product List - Left Sidebar</a></li>
+																<li><a href="" title="Fast Food">Fast Food</a></li>
+																<li><a href="" title="Heavy Food">Heavy Food</a></li>
+																<li><a href="" title="Fruits and Vegetables">Fruits and Vegetables</a></li>
+																<li><a href="" title="Drinks">Drinks</a></li>
 															</ul>
 														</div>
 													</li>
-													<li class="dropdown-submenu">
-														<a href="product-detail-left-sidebar.html" title="Product List">Product Detail</a>
-														<div class="dropdown-menu level2">
-															<ul>
-																<li><a href="product-detail-left-sidebar.html" title="Product Detail - Left Sidebar">Product Detail - Left Sidebar</a></li>
-																<li><a href="product-detail-full-width-1.html" title="Product List - Full Width 1">Product Detail - Full Width 1</a></li>
-																<li><a href="product-detail-full-width-2.html" title="Product List - Full Width 2">Product Detail - Full Width 2</a></li>
-															</ul>
-														</div>
+		
+													<li>
+														<a href="{% url 'cart_details' %}" title="Cart">Cart</a>
 													</li>
 													<li>
-														<a href="product-cart.html" title="Cart">Cart</a>
-													</li>
-													<li>
-														<a href="product-checkout.html" title="Checkout">Checkout</a>
+														<a href="{% url 'checkout' %}" title="Checkout">Checkout</a>
 													</li>
 													<li class="dropdown-submenu">
 														<a href="#" title="User">User</a>
