@@ -44,3 +44,11 @@ def cart_details(request):
 
 def checkout(request):
     return render(request, 'checkout.html')
+
+
+def food_list(request):
+    return render(request, 'food_list.html')
+
+
+def food_details(request):
+    return render(request, 'food_details.html')
