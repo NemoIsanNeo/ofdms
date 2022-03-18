@@ -29,6 +29,7 @@ def register(request):
             userdata.address = address
             userdata.password = password
             userdata.cpass = cpass
+            userdata.save()
         else:
             print('Nothing')
     return render(request, 'register.html')
