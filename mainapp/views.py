@@ -53,3 +53,45 @@ def food_list(request):
 
 def food_details(request):
     return render(request, 'food_details.html')
+
+from django.shortcuts import render,redirect,reverse
+
+
+def is_teacher(user):
+    return user.groups.filter(name='TEACHER').exists()
+
+def is_vendor(user):
+    return user.groups.filter(name='VENDOR').exists()
+
+
+
+def afterlogin_view(request):
+    if is_vendor(request.user):
+        return redirect('vendor/dashboard')
+
+    # elif is_teacher(request.user):
+    #     if request.POST:
+    #         verifyno = TMODEL.Teacher.objects.filter(user_id=request.user.id).values('verification')
+    #         verifydata = verifyno[0]['verification']
+    #         if str(request.POST['verifynumber']) == str(verifydata):
+    #             teacherm = TMODEL.Teacher.objects.get(user_id=request.user.id)
+    #             teacherm.verify_state = 1
+    #             teacherm.save()
+    #             accountapproval = TMODEL.Teacher.objects.all().filter(user_id=request.user.id, status=True, )
+    #             if accountapproval:
+    #                 return redirect('teacher/teacher-dashboard')
+    #             else:
+    #                 return render(request, 'teacher/teacher_wait_for_approval.html')
+    #         else:
+    #             return render(request, 'teacher/verify.html')
+    #     accountapproval = TMODEL.Teacher.objects.all().filter(user_id=request.user.id, status=True, )
+    #     if accountapproval:
+    #         return redirect('teacher/teacher-dashboard')
+    #     else:
+    #         verify = TMODEL.Teacher.objects.all().filter(user_id=request.user.id, verify_state=0)
+    #         if verify:
+    #             return render(request, 'teacher/verify.html')
+    #         else:
+    #             return render(request, 'teacher/teacher_wait_for_approval.html')
+    # else:
+    #     return redirect('admin-dashboard')

@@ -1,0 +1,65 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block body %}
+<div id="content" class="site-content">
+    <!-- Breadcrumb -->
+    <div id="breadcrumb">
+        <div class="container">
+            <h2 class="title">Create Vendor Account</h2>
+
+            <ul class="breadcrumb">
+                <li><a href="{% url 'index' %}" title="Home">Home</a></li>
+                <li><span>Register</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="register-page">
+            <div class="register-form form">
+                <div class="block-title">
+                    <h2 class="title"><span>Create Vendor Account</span></h2>
+                </div>
+
+                <form method="POST" autocomplete="off" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username">Company Name</label>
+                        {% render_field vendorForm.company_name|attr:'required:true' class="form-control" placeholder="Company Name" %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        {% render_field userForm.username|attr:'required:true' class="form-control" placeholder="Username" %}
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        {% render_field userForm.email|attr:'required:true' class="form-control" placeholder="Email" %}
+                    </div>
+                    <div class="form-group ">
+                        <label for="mobile">Contact</label>
+                        {% render_field vendorForm.mobile|attr:'required:true' class="form-control" placeholder="Contact Number" %}
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword4">Password</label>
+                        {% render_field userForm.password|attr:'required:true' class="form-control" placeholder="Password" %}
+                    </div>
+                    <br>
+
+
+                    <button type="submit" class="btn btn-success" style="border-radius: 0%;">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+
+</div>
+<br>
+<br>
+<br>
+{% endblock body %}
