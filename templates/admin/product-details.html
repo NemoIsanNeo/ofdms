@@ -1,0 +1,152 @@
+{% extends 'vendor/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+      a:link {
+        text-decoration: none;
+      }
+  
+      .order-card {
+        color: rgb(255, 255, 255);
+      }
+  
+      .bg-c-blue {
+        background: #04868f;
+      }
+  
+      .bg-c-green {
+        background:#4C51BF;
+      }
+  
+      .bg-c-yellow {
+        background: #F56565;
+      }
+  
+      .bg-c-pink {
+        background: #663a30;
+      }
+  
+  
+      .card {
+        
+        -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+        box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+        margin-bottom: 30px;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+      }
+  
+      .card .card-block {
+        padding: 25px;
+      }
+  
+      .order-card i {
+        font-size: 26px;
+      }
+  
+      .f-left {
+        float: left;
+      }
+  
+      .f-right {
+        float: right;
+      }
+      header {
+      left: 0px;
+      right: 0px;
+    }
+    </style>
+  </head>
+<br><br>
+
+  <div class="container">
+    <div class="text-center">
+        <!-- Trigger the modal with a button -->
+          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Products</button>
+    </div>
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+            <form method="POST" autocomplete="off" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username">Product Name</label>
+                        {% render_field product_form.name|attr:'required:true' class="form-control" placeholder="Company Name" %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username">Category</label>
+                        {% render_field product_form.cat_id|attr:'required:true' class="form-control" placeholder="Username" %}
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Price</label>
+                        {% render_field product_form.price|attr:'required:true' class="form-control" placeholder="Email" %}
+                    </div>
+                    <div class="form-group ">
+                        <label for="mobile">Product Image</label>
+                        {% render_field product_form.image|attr:'required:true' class="form-control" placeholder="Contact Number" %}
+                    </div>
+                    <br>
+
+
+                    <button type="submit" class="btn btn-success" style="border-radius: 0%;">Add</button>
+                </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+    <!-- table -->
+     <div style="margin-top: 3rem">
+         <table class="table table-bordered">
+             <thead class="thead-light">
+             <tr>
+                 <th scope="col">#</th>
+                 <th scope="col">Name</th>
+                 <th scope="col">Category</th>
+                 <th scope="col">Price</th>
+             </tr>
+             </thead>
+             <tbody>
+             {% for i in product %}
+             <tr>
+                 <th scope="row">{{ forloop.counter }}</th>
+                 <td>{{ i.name }}</td>
+                 <td>{{ i.category }}</td>
+                 <td>{{ i.price }} TK</td>
+             </tr>
+             {% endfor %}
+             </tbody>
+         </table>
+     </div>
+    <!-- table -->
+  </div>
+
+
+<br><br><br><br><br><br><br><br><br><br>
+
+<script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+
+
+{% endblock content %}

@@ -1,11 +1,17 @@
 from django.shortcuts import render
 from . import models
+from product import models as pmodel
 
 
 # Create your views here.
 
 def index(request):
-    return render(request, 'index.html')
+    product =  pmodel.Product.objects.all()
+    dict = {'product':product}
+    if is_vendor(request.user):
+        return redirect('vendor/dashboard')
+
+    return render(request, 'index.html',context=dict)
 
 
 def login(request):
@@ -57,8 +63,6 @@ def food_details(request):
 from django.shortcuts import render,redirect,reverse
 
 
-def is_teacher(user):
-    return user.groups.filter(name='TEACHER').exists()
 
 def is_vendor(user):
     return user.groups.filter(name='VENDOR').exists()
@@ -92,6 +96,12 @@ def afterlogin_view(request):
     #         if verify:
     #             return render(request, 'teacher/verify.html')
     #         else:
-    #             return render(request, 'teacher/teacher_wait_for_approval.html')
-    # else:
-    #     return redirect('admin-dashboard')
+    #           return render(request, 'teacher/teacher_wait_for_approval.html')
+    else:
+        return redirect('admin-dashboard')
+
+
+
+def admin_dashboard_view(request):
+
+    return render(request,'admin/dashboard.html',context=dict)

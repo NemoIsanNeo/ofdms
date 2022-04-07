@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from . import models, forms
+from product import models as pmodel
+
 from django.contrib.auth.models import User, Group
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required,user_passes_test
@@ -32,9 +34,29 @@ def is_vendor(user):
     return user.groups.filter(name='VENDOR').exists()
 
 
-@login_required(login_url='studentlogin')
+@login_required(login_url='vendor/login')
 @user_passes_test(is_vendor)
 def dashboard(request):
     dict ={}
     return render(request,'vendor/dashboard.html',context=dict)
+
+
+
+@login_required(login_url='vendor/login')
+@user_passes_test(is_vendor)
+def product_details(request):
+    product_form = forms.ProductAddForm()
+    product = pmodel.Product.objects.all()
+    dict ={'product_form':product_form,'product':product}
+    if request.method == 'POST':
+        product_form = forms.ProductAddForm(request.POST,request.FILES)
+        if product_form.is_valid():
+            product_details = product_form.save(commit=False)
+            product_details.category = pmodel.ProductCategory.objects.get(id=request.POST.get('cat_id'))
+            product_details.save()
+            return HttpResponseRedirect('/vendor/product-details')            # import pdb; pdb.set_trace()
+
+
+
+    return render(request,'vendor/product-details.html',context=dict)
 
