@@ -1,0 +1,113 @@
+{% extends 'vendor/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+      a:link {
+        text-decoration: none;
+      }
+  
+      .order-card {
+        color: rgb(255, 255, 255);
+      }
+  
+      .bg-c-blue {
+        background: #04868f;
+      }
+  
+      .bg-c-green {
+        background:#4C51BF;
+      }
+  
+      .bg-c-yellow {
+        background: #F56565;
+      }
+  
+      .bg-c-pink {
+        background: #663a30;
+      }
+  
+  
+      .card {
+        
+        -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+        box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+        margin-bottom: 30px;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+      }
+  
+      .card .card-block {
+        padding: 45px;
+      }
+  
+      .order-card i {
+        font-size: 26px;
+      }
+  
+      .f-left {
+        float: left;
+      }
+  
+      .f-right {
+        float: right;
+      }
+      header {
+      left: 0px;
+      right: 0px;
+    }
+    </style>
+  </head>
+<br><br>
+
+  <div class="container">
+    <div class="text-center">
+        <!-- Trigger the modal with a button -->
+        <h1>Edit Product</h1>
+    </div>
+
+
+
+
+     <div style="margin-top: 3rem">
+          <form method="POST" autocomplete="off" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username">Product Name</label>
+                        {% render_field product_form.name class="form-control" placeholder="Product Name" %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username">Category</label>
+                        {% render_field product_form.cat_id class="form-control" placeholder="Username" %}
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Price</label>
+                        {% render_field product_form.price class="form-control" placeholder="Price" %}
+                    </div>
+                    <div class="form-group ">
+                        <label for="mobile">Product Image</label>
+                        {% render_field product_form.image class="form-control" placeholder="Contact Number" %}
+                    </div>
+                    <br>
+
+
+                    <button type="submit" class="btn  btn-success text-center" style="border-radius: 0%;">Update</button>
+                </form>
+     </div>
+    <!-- table -->
+  </div>
+
+
+<br><br><br><br><br><br><br><br><br><br>
+
+<script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+
+
+{% endblock content %}

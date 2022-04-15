@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from vendor import views as vviews
 
 urlpatterns = [path('', views.index, name='index'),path('index', views.index, name='index'),
                path('login/', views.login, name='login'),
@@ -10,4 +11,18 @@ urlpatterns = [path('', views.index, name='index'),path('index', views.index, na
                path('food_details/', views.food_details, name='food_details'),
                path('food_list/', views.food_list, name='food_list'),
                path('after_login', views.afterlogin_view, name='after_login'),
+               path('admin-dashboard', views.admin_dashboard_view, name='admin-dashboard'),
+               path('sadmin/product-details/', views.product_details, name='product-details'),
+               path('sadmin/product-category/', views.cat_details, name='product-details'),
+               path('product-category/delete/<int:pk>', views.delete_product_category, name='product-delete'),
+
+               path('sadmin/vendor/', views.vendor, name='product-details'),
+               path('product/accept/<int:pk>', views.accept_product, name='product-accept'),
+               path('product/reject/<int:pk>', views.reject_product, name='product-reject'),
+               path('product/delete/<int:pk>', views.delete_product, name='product-delete'),
+
+               path('vendor/accept/<int:pk>', views.accept_vendor, name='vendor-accept'),
+               path('vendor/reject/<int:pk>', views.reject_vendor, name='product-reject'),
+               path('vendor/delete/<int:pk>', views.delete_vendor, name='product-delete'),
+
                ]

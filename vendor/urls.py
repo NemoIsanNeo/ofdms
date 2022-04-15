@@ -7,5 +7,6 @@ urlpatterns = [
                path('login/', LoginView.as_view(template_name='vendor/login.html'), name='vendor_login'),
                path('dashboard/', views.dashboard, name='vendor_dashboard'),
                path('product-details/', views.product_details, name='vendor_dashboard'),
+               path('product-edit/<int:pk>', views.edit, name='edit'),
 
 ]

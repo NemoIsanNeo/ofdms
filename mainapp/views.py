@@ -1,12 +1,18 @@
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from . import models
 from product import models as pmodel
+from vendor import forms as vfrom
+from vendor import models as vmodel
+from django.contrib.auth.models import User
+
 
 
 # Create your views here.
 
 def index(request):
-    product =  pmodel.Product.objects.all()
+    product =  pmodel.Product.objects.all().filter(status=1)
     dict = {'product':product}
     if is_vendor(request.user):
         return redirect('vendor/dashboard')
@@ -71,7 +77,12 @@ def is_vendor(user):
 
 def afterlogin_view(request):
     if is_vendor(request.user):
-        return redirect('vendor/dashboard')
+        vendor = vmodel.Vendor.objects.get(user=request.user.id)
+        if vendor.status == '1':
+            return HttpResponseRedirect('vendor/dashboard')
+        else:
+            return redirect('logout')
+
 
     # elif is_teacher(request.user):
     #     if request.POST:
@@ -103,5 +114,105 @@ def afterlogin_view(request):
 
 
 def admin_dashboard_view(request):
+    dict = {}
 
     return render(request,'admin/dashboard.html',context=dict)
+
+@login_required(login_url='adminlogin')
+def cat_details(request):
+    cat_form = vfrom.ProductCatAddForm()
+    product_cat = pmodel.ProductCategory.objects.all()
+    dict ={'cat_form':cat_form,'product':product_cat}
+    if request.method == 'POST':
+        product_cat = vfrom.ProductCatAddForm(request.POST)
+        if product_cat.is_valid():
+            product_cat = product_cat.save(commit=False)
+            product_cat.save()
+            return HttpResponseRedirect('/sadmin/product-category/')
+    return render(request, 'admin/cat-details.html',context=dict)
+
+@login_required(login_url='adminlogin')
+def delete_product_category(request, pk):
+    product_cat =  pmodel.ProductCategory.objects.get(id=pk)
+    product_cat.delete()
+    return HttpResponseRedirect('/sadmin/product-category')  # import pdb; pdb.set_trace()
+
+@login_required(login_url='adminlogin')
+def product_details(request):
+    product_form = vfrom.ProductAddForm()
+    product = pmodel.Product.objects.all()
+    dict ={'product_form':product_form,'product':product}
+    if request.method == 'POST':
+        product_form = vfrom.ProductAddForm(request.POST,request.FILES)
+        if product_form.is_valid():
+            product_details = product_form.save(commit=False)
+            product_details.category = pmodel.ProductCategory.objects.get(id=request.POST.get('cat_id'))
+            product_details.save()
+            return HttpResponseRedirect('/sadmin/product-details')            # import pdb; pdb.set_trace()
+
+
+
+    return render(request,'admin/product-details.html',context=dict)
+
+
+@login_required(login_url='adminlogin')
+def vendor(request):
+    vendor = vmodel.Vendor.objects.all()
+    dict ={'vendor':vendor}
+
+    return render(request,'admin/vendor.html',context=dict)
+
+
+
+@login_required(login_url='adminlogin')
+def accept_product(request, pk):
+    product =  pmodel.Product.objects.get(id=pk)
+    product.status = 1
+    product.save()
+    return HttpResponseRedirect('/sadmin/product-details')  # import pdb; pdb.set_trace()
+
+
+@login_required(login_url='adminlogin')
+def reject_product(request, pk):
+    product =  pmodel.Product.objects.get(id=pk)
+    product.status = 2
+    product.save()
+    return HttpResponseRedirect('/sadmin/product-details')  # import pdb; pdb.set_trace()
+
+
+
+@login_required(login_url='adminlogin')
+def delete_product(request, pk):
+    product =  pmodel.Product.objects.get(id=pk)
+    product.delete()
+    return HttpResponseRedirect('/sadmin/product-details')  # import pdb; pdb.set_trace()
+
+
+
+
+
+
+
+
+
+@login_required(login_url='adminlogin')
+def accept_vendor(request, pk):
+
+    vendor =  vmodel.Vendor.objects.get(id=pk)
+    vendor.status = 1
+    vendor.save()
+    return HttpResponseRedirect('/sadmin/vendor')  # import pdb; pdb.set_trace()
+
+
+@login_required(login_url='adminlogin')
+def reject_vendor(request, pk):
+    vendor =  vmodel.Vendor.objects.get(id=pk)
+    vendor.status = 2
+    vendor.save()
+    return HttpResponseRedirect('/sadmin/vendor')  # import pdb; pdb.set_trace()
+
+@login_required(login_url='adminlogin')
+def delete_vendor(request, pk):
+    vendor =  vmodel.Vendor.objects.get(id=pk)
+    vendor.delete()
+    return HttpResponseRedirect('/sadmin/vendor')  # import pdb; pdb.set_trace()

@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'mainapp',
     'vendor',
     'widget_tweaks',
-    'product'
+    'product',
+    'ckeditor'
 
 ]
 

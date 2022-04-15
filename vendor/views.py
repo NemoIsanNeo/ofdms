@@ -46,17 +46,36 @@ def dashboard(request):
 @user_passes_test(is_vendor)
 def product_details(request):
     product_form = forms.ProductAddForm()
-    product = pmodel.Product.objects.all()
+    product = pmodel.Product.objects.all().filter(created_by=models.Vendor.objects.get(user=request.user.id))
     dict ={'product_form':product_form,'product':product}
     if request.method == 'POST':
         product_form = forms.ProductAddForm(request.POST,request.FILES)
         if product_form.is_valid():
             product_details = product_form.save(commit=False)
             product_details.category = pmodel.ProductCategory.objects.get(id=request.POST.get('cat_id'))
+            product_details.created_by = models.Vendor.objects.get(user=request.user.id)
             product_details.save()
             return HttpResponseRedirect('/vendor/product-details')            # import pdb; pdb.set_trace()
 
 
 
     return render(request,'vendor/product-details.html',context=dict)
+
+
+@login_required(login_url='vendor/login')
+@user_passes_test(is_vendor)
+def edit(request, pk):
+    instance = pmodel.Product.objects.get(id=pk)
+    product_form = forms.ProductAddForm(instance=instance)
+    dict = {'product_form': product_form}
+    if request.method == 'POST':
+        product_form = forms.ProductAddForm(request.POST, request.FILES)
+        if product_form.is_valid():
+            product_details = product_form.save(commit=False)
+            product_details.category = pmodel.ProductCategory.objects.get(id=request.POST.get('cat_id'))
+            product_details.created_by = models.Vendor.objects.get(user=request.user.id)
+            product_details.save()
+            return HttpResponseRedirect('/vendor/product-details')
+
+    return render(request, 'vendor/edit-product.html', context=dict)
 

@@ -1,4 +1,4 @@
-{% extends 'vendor/base.html' %}
+{% extends 'admin/base.html' %}
 {% load widget_tweaks %}
 {% block content %}
 
@@ -44,7 +44,7 @@
       }
   
       .card .card-block {
-        padding: 45px;
+        padding: 25px;
       }
   
       .order-card i {
@@ -69,7 +69,7 @@
   <div class="container">
     <div class="text-center">
         <!-- Trigger the modal with a button -->
-          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Products</button>
+          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Category</button>
     </div>
 
 
@@ -82,27 +82,14 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Product</h4>
+          <h4 class="modal-title">Product Category</h4>
         </div>
         <div class="modal-body">
             <form method="POST" autocomplete="off" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
-                        <label for="username">Product Name</label>
-                        {% render_field product_form.name|attr:'required:true' class="form-control" placeholder="Product Name" %}
-                    </div>
-
-                    <div class="form-group">
-                        <label for="username">Category</label>
-                        {% render_field product_form.cat_id|attr:'required:true' class="form-control" placeholder="Username" %}
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Price</label>
-                        {% render_field product_form.price|attr:'required:true' class="form-control" placeholder="Price" %}
-                    </div>
-                    <div class="form-group ">
-                        <label for="mobile">Product Image</label>
-                        {% render_field product_form.image|attr:'required:true' class="form-control" placeholder="Contact Number" %}
+                        <label for="username">Category Name</label>
+                        {% render_field cat_form.name|attr:'required:true' class="form-control" placeholder="Category Name" %}
                     </div>
                     <br>
 
@@ -124,10 +111,8 @@
              <tr>
                  <th scope="col">#</th>
                  <th scope="col">Name</th>
-                 <th scope="col">Category</th>
-                 <th scope="col">Price</th>
-                 <th scope="col">Status</th>
                  <th scope="col">Action</th>
+
              </tr>
              </thead>
              <tbody>
@@ -135,10 +120,9 @@
              <tr>
                  <th scope="row">{{ forloop.counter }}</th>
                  <td>{{ i.name }}</td>
-                 <td>{{ i.category }}</td>
-                 <td>{{ i.price }} TK</td>
-                 <td class="text-center">{% if i.status == '0' %}<p class=" btn btn-warning">Pending</p> {% endif %}</td>
-                 <td class="text-center"><a href="/vendor/product-edit/{{ i.id }}"><i class="fas fa-edit"></i></a> <a href=""><i class="fas fa-trash-alt"></i></a></td>
+                  <td class="text-center">
+                                        <a class="btn btn-danger" href="/product-category/delete/{{ i.id }}">Delete</a>
+                  </td>
 
              </tr>
              {% endfor %}

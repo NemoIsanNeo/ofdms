@@ -1,4 +1,4 @@
-{% extends 'vendor/base.html' %}
+{% extends 'admin/base.html' %}
 {% load widget_tweaks %}
 {% block content %}
 
@@ -43,7 +43,7 @@
       }
   
       .card .card-block {
-        padding: 25px;
+        padding: 45px;
       }
   
       .order-card i {
@@ -72,7 +72,7 @@
       <div class="col-md-4 col-xl-6">
         <div class="card bg-c-blue order-card">
           <div class="card-block">
-            <h6 class="m-b-20">Total Products</h6>
+            <h6 class="mb-4">Total Vendor</h6>
            <h2 class="text-right"><i class="fas fa-book f-left"></i><span></span></h2>
           </div>
         </div>
@@ -81,12 +81,23 @@
       <div class="col-md-4 col-xl-6">
         <div class="card bg-c-yellow order-card">
           <div class="card-block">
-            <h6 class="m-b-20">Total Pending Products</h6>
+            <h6 class="mb-5">Total Delivery Man</h6>
             <h2 class="text-right"><i class="fas fa-question-circle f-left"></i><span></span></h2>
             
           </div>
         </div>
       </div>
+
+        <div class="col-md-4 col-xl-6">
+        <div class="card bg-c-yellow order-card">
+          <div class="card-block">
+            <h6 class="mb-5">Total Today Order</h6>
+            <h2 class="text-right"><i class="fas fa-question-circle f-left"></i><span></span></h2>
+
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
