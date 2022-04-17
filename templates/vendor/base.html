@@ -31,7 +31,7 @@
     }
 
     header {
-          position: fixed;
+          position: relative;
     background: #ffffff;
     width: 100%;
     z-index: 1;
@@ -78,18 +78,15 @@
     }
 
     .sidebar {
-                 background: #ffffff;
+                   background: #ffffff;
     padding-top: 30px;
-    position: relative;
-    left: 0;
     width: 250px;
-    height: 100%;
     transition: 0.5s;
     transition-property: left;
     border-right: 5px solid #e8e8e8;
     float: left;
     top: 104px;
-    height: 72vh;
+        height: 100vh;
     }
 
     .sidebar .profile_image {
@@ -157,11 +154,10 @@
     }
 
     .content {
-      margin-left: 250px;
-      background-position: center;
-      background-size: cover;
-      height: 100vh;
-      transition: 0.5s;
+             background-position: center;
+    background-size: cover;
+    transition: 0.5s;
+    display: flex;
     }
 
     #check:checked~.content {

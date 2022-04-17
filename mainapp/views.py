@@ -1,11 +1,14 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+
+from mainapp.models import Orders
 from . import models
 from product import models as pmodel
 from vendor import forms as vfrom
 from vendor import models as vmodel
-from django.contrib.auth.models import User
+from . import forms
+from django.contrib.auth.models import User , Group
 
 
 
@@ -20,31 +23,29 @@ def index(request):
     return render(request, 'index.html',context=dict)
 
 
-def login(request):
-    return render(request, 'login.html')
+
+
+
 
 
 def register(request):
-    userdata = models.user_details()
+    userForm = forms.GUserForm()
+    gfrom = forms.GForm()
+    mydict = {'userForm': userForm, 'gfrom': gfrom, 'error': None}
     if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        address = request.POST.get('address')
-        password = request.POST.get('password')
-        cpass = request.POST.get('cpass')
-
-        if name and email and phone and address and password and cpass:
-            userdata.name = name
-            userdata.email = email
-            userdata.phone = phone
-            userdata.address = address
-            userdata.password = password
-            userdata.cpass = cpass
-            userdata.save()
-        else:
-            print('Nothing')
-    return render(request, 'register.html')
+        userForm = forms.GUserForm(request.POST)
+        gfrom = forms.GForm(request.POST)
+        if userForm.is_valid() and gfrom.is_valid():
+            user = userForm.save()
+            user.set_password(user.password)
+            user.save()
+            vendor = gfrom.save(commit=False)
+            vendor.user = user
+            vendor.save()
+            vendor_group = Group.objects.get_or_create(name='GUEST')
+            vendor_group[0].user_set.add(user)
+        return HttpResponseRedirect('/login')
+    return render(request, 'register.html', context=mydict)
 
 
 def account(request):
@@ -56,7 +57,33 @@ def cart_details(request):
 
 
 def checkout(request):
-    return render(request, 'checkout.html')
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            items_json = request.POST.get('itemsJson')
+            name = request.POST.get('name')
+            email = request.POST.get('email')
+            address = request.POST.get('address1') + " " + request.POST.get('address2')
+            city = request.POST.get('city')
+            state = request.POST.get('state')
+            zip_code = request.POST.get('zip_code')
+            phone = request.POST.get('phone')
+
+            order = Orders(items_json=items_json, name=name, email=email, address=address, city=city, state=state,
+                           zip_code=zip_code, phone=phone)
+
+            order.order_by = models.Users.objects.get(user=request.user.id)
+            order.save()
+            thank = True
+            id = order.order_id
+            return render(request, 'checkout.html', {'thank': thank, 'id': id})
+        return render(request, 'checkout.html')
+    else:
+        return redirect("login")
+
+
+
+
+
 
 
 def food_list(request):
@@ -73,6 +100,9 @@ from django.shortcuts import render,redirect,reverse
 def is_vendor(user):
     return user.groups.filter(name='VENDOR').exists()
 
+def is_guest(user):
+    return user.groups.filter(name='GUEST').exists()
+
 
 
 def afterlogin_view(request):
@@ -83,6 +113,8 @@ def afterlogin_view(request):
         else:
             return redirect('logout')
 
+    elif is_guest(request.user):
+        return redirect('/')
 
     # elif is_teacher(request.user):
     #     if request.POST:

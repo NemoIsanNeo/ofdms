@@ -4,715 +4,460 @@
 <html lang="zxx">
 
 <head>
-		<!-- Basic Page Needs -->
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>OFDMS</title>
-		
-		<meta name="keywords" content="Organic, Fresh Food">
-		<meta name="description" content="OFDMS - Organic, Fresh Food">
-		<meta name="author" content="tivatheme">
-		
-		<!-- Favicon -->
-		<link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/png">
-		
-		<!-- Mobile Meta -->
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		
-		<!-- Google Fonts -->
-		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Playfair+Display:300,400,700" rel="stylesheet">
-		
-		<!-- Vendor CSS -->
-		<link rel="stylesheet" href="{% static 'libs/bootstrap/css/bootstrap.css' %}">
-		<link rel="stylesheet" href="{% static 'libs/font-awesome/css/font-awesome.min.css' %}">
-		<link rel="stylesheet" href="{% static 'libs/font-material/css/material-design-iconic-font.min.css' %}">
-		<link rel="stylesheet" href="{% static 'libs/nivo-slider/css/nivo-slider.css' %}">
-		<link rel="stylesheet" href="{% static 'libs/nivo-slider/css/animate.css' %}">
-		<link rel="stylesheet" href="{% static 'libs/nivo-slider/css/style.css' %}">
-		<link rel="stylesheet" href="{% static 'libs/owl.carousel/assets/owl.carousel.min.css' %}">
-		<link rel="stylesheet" href="{% static 'libs/slider-range/css/jslider.css' %}">
-		
-		<!-- Template CSS -->
-		<link rel="stylesheet" href="{% static 'css/style.css' %}">
-		<link rel="stylesheet" href="{% static 'css/reponsive.css' %}">
-	</head>
-	
-	<body class="home home-4">
-		<div id="all">
-			<!-- Header -->
-			<header id="header">
-				<div class="container">
-					<div class="header-top">
-						<div class="row align-items-center">
-							<!-- Header Left -->
-							<div class="col-lg-5 col-md-5 col-sm-12">
-								<!-- Main Menu -->
-								<div id="main-menu">
-									<ul class="menu">
-										<li class="dropdown">
-											<a href="{% url 'index' %}" title="Homepage">Home</a>
-										</li>
-										
-										<li class="dropdown">
-											<a href="{% url 'food_list' %}" title="Food Lists">Food Lists</a>
-											<div class="dropdown-menu">
-												<ul>
-													<li class="has-image">
-														<img src="{% static 'img/product/product-category-1.png' %}" alt="Product Category Image">
-														<a href="product-grid-left-sidebar.html" title="Vegetables">Vegetables</a>
-													</li>
+    <!-- Basic Page Needs -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>OFDMS</title>
 
-													<li class="has-image">
-														<img src="{% static 'img/product/product-category-3.png' %}" alt="Product Category Image">
-														<a href="product-grid-left-sidebar.html" title="Bread">Bread</a>
-													</li>
+    <meta name="keywords" content="Organic, Fresh Food">
+    <meta name="description" content="OFDMS - Organic, Fresh Food">
+    <meta name="author" content="tivatheme">
 
-													<li class="has-image">
-														<img src="{% static 'img/product/product-category-2.png' %}" alt="Product Category Image">
-														<a href="" title="Fruits and Vegetables">Fruits and Vegetables</a>
-													</li>
-													
-													<li class="has-image">
-														<img src="{% static 'img/product/product-category-4.png' %}" alt="Product Category Image">
-														<a href="" title="Drinks">Drinks</a>
-													</li>
-													
-												</ul>
-											</div>
-										</li>
-										
-										<li class="dropdown">
-											<a href="#" title="Menu">Menu</a>
-											<div class="dropdown-menu">
-												<ul>
-													<li class="dropdown-submenu">
-														<a href="" title="Food Catagory">Food Catagory</a>
-														<div class="dropdown-menu level2">
-															<ul>
-																<li><a href="" title="Fast Food">Fast Food</a></li>
-																<li><a href="" title="Heavy Food">Heavy Food</a></li>
-																<li><a href="" title="Fruits and Vegetables">Fruits and Vegetables</a></li>
-																<li><a href="" title="Drinks">Drinks</a></li>
-															</ul>
-														</div>
-													</li>
-		
-													<li>
-														<a href="{% url 'cart_details' %}" title="Cart">Cart</a>
-													</li>
-													<li>
-														<a href="{% url 'checkout' %}" title="Checkout">Checkout</a>
-													</li>
-													<li class="dropdown-submenu">
-														<a href="#" title="User">User</a>
-														<div class="dropdown-menu level2">
-															<ul>
-																<li><a href="{% url 'login' %}" title="Login">Login</a></li>
-																<li><a href="{% url 'register' %}" title="Register">Register</a></li>
-																<li><a href="{% url 'account' %}" title="My Account">My Account</a></li>
-															</ul>
-														</div>
-													</li>
-													<li>
-														<a href="page-404.html" title="Page 404">Page 404</a>
-													</li>
-												</ul>
-											</div>
-										</li>
-										
-										<li class="dropdown">
-											<a href="blog-list-left-sidebar-1.html">Blog</a>
-											<div class="dropdown-menu">
-												<ul class="has-sub">
-													<li><a href="blog-list-left-sidebar-1.html" title="Blog List - Left Sidebar 1">Blog List - Left Sidebar 1</a></li>
-													<li><a href="blog-list-left-sidebar-2.html" title="Blog List - Left Sidebar 2">Blog List - Left Sidebar 2</a></li>
-													<li><a href="blog-grid-full-width.html" title="Blog Grid - Full Width">Blog Grid - Full Width</a></li>
-													<li><a href="blog-detail.html" title="Blog Detail">Blog Detail</a></li>
-												</ul>
-											</div>
-										</li>
-										
-										<li>
-											<a href="page-about-us.html">About Us</a>
-										</li>
-										
-										<li>
-											<a href="page-contact.html">Contact</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-							
-							<!-- Header Center -->
-							<div class="col-lg-2 col-md-2 col-sm-12 header-center justify-content-center">
-								<!-- Logo -->		
-								<div class="logo">
-									<a href="{% url 'index' %}">
-										<img class="img-responsive" src="{% static 'img/logo.png' %}" alt="Logo">
-									</a>
-								</div>
-								
-								<span id="toggle-mobile-menu"><i class="zmdi zmdi-menu"></i></span>
-							</div>
-							
-							
-							<!-- Header Right -->
-							<div class="col-lg-5 col-md-5 col-sm-12 header-right d-flex justify-content-end align-items-center">
-								<!-- Search -->							
-								<div class="form-search">
-									<form action="#" method="get">
-										<input type="text" class="form-input" placeholder="Search">
-										<button type="submit" class="fa fa-search"></button>
-									</form>
-								</div>
-								
-								<!-- Cart -->
-								<div class="block-cart dropdown">
-									<div class="cart-title">
-										<i class="fa fa-shopping-basket" aria-hidden="true"></i>
-										<span class="cart-count">2</span>
-									</div>
-									
-									<div class="dropdown-content">
-										<div class="cart-content">
-											<table>
-												<tbody>
-													<tr>
-														<td class="product-image">
-															<a href="product-detail-left-sidebar.html">
-																<img src="{% static 'img/product/7.jpg' %}" alt="Product">
-															</a>
-														</td>
-														<td>
-															<div class="product-name">
-																<a href="product-detail-left-sidebar.html">Organic Strawberry Fruits</a>
-															</div>
-															<div>	
-																2 x <span class="product-price">$28.98</span>
-															</div>
-														</td>
-														<td class="action">
-															<a class="remove" href="#">
-																<i class="fa fa-trash-o" aria-hidden="true"></i>
-															</a>
-														</td>
-													</tr>
-													
-													<tr>
-														<td class="product-image">
-															<a href="product-detail-left-sidebar.html">
-																<img src="img/product/6.jpg" alt="Product">
-															</a>
-														</td>
-														<td>
-															<div class="product-name">
-																<a href="product-detail-left-sidebar.html">Organic Strawberry</a>
-															</div>
-															<div>	
-																1 x <span class="product-price">$35.00</span>
-															</div>
-														</td>
-														<td class="action">
-															<a class="remove" href="#">
-																<i class="fa fa-trash-o" aria-hidden="true"></i>
-															</a>
-														</td>
-													</tr>
-													
-													<tr class="total">
-														<td>Total:</td>
-														<td colspan="2">$92.96</td>
-													</tr>
-													
-													<tr>
-														<td colspan="3">
-															<div class="cart-button">
-																<a class="btn btn-primary" href="{%url 'cart_details'%}" title="View Cart">View Cart</a>
-																<a class="btn btn-primary" href="{% url 'checkout' %}" title="Checkout">Checkout</a>
-															</div>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-								
-								
-								<!-- My Account -->
-								<div class="my-account dropdown toggle-icon">
-									<div class="dropdown-toggle" data-toggle="dropdown">
-										<i class="zmdi zmdi-menu"></i>
-									</div>
-									<div class="dropdown-menu">										
-										<div class="item">
-											<a href="{% url 'account' %}" title="User Account Details"><i class="fa fa-cog"></i>My Account</a>
-										</div>
-										<div class="item">
-											<a href="{% url 'login' %}" title="Log in to your customer account"><i class="fa fa-sign-in"></i>Login</a>
-										</div>
-										<div class="item">
-											<a href="{% url 'register' %}" title="Register Account"><i class="fa fa-user"></i>Register</a>
-										</div>
-										
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>	
-			</header>
-			
-			{% block body %}
-			<!-- Main Content -->
-			<div id="content" class="site-content">				
-				<!-- Slideshow -->
-				<div class="section slideshow">
-					<div class="container">
-						<div class="tiva-slideshow-wrapper">
-							<div id="tiva-slideshow" class="nivoSlider">
-								<a href="#">
-									<img class="img-responsive" src="{% static 'img/slideshow/home4-slideshow-1.jpg' %}" alt="Slideshow Image">
-								</a>
-								<a href="#">
-									<img class="img-responsive" src="{% static 'img/slideshow/home4-slideshow-2.jpg' %}" alt="Slideshow Image">
-								</a>
-								<a href="#">
-									<img class="img-responsive" src="{% static 'img/slideshow/home4-slideshow-3.jpg' %}" alt="Slideshow Image">
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-				
-				<!-- Payment Intro -->
-				<div class="section payment-intro">
-					<div class="container">
-						<div class="payment-wrap">
-							<div class="row">
-								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-									<div class="item d-flex">
-										<div class="item-left">
-											<img src="{% static 'img/home1-payment-1.png' %}" alt="Payment Intro">
-										</div>
-										<div class="item-right">
-											<h3 class="title">Free Shipping item</h3>
-											<div class="content">Proin gravida nibh vel velit auctor aliquet. Aenean lorem quis bibendum auctor</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-									<div class="item d-flex">
-										<div class="item-left">
-											<img src="{% static 'img/home1-payment-2.png' %}" alt="Payment Intro">
-										</div>	
-										<div class="item-right">
-											<h3 class="title">Secured Payment</h3>
-											<div class="content">Proin gravida nibh vel velit auctor aliquet. Aenean lorem quis bibendum auctor</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-									<div class="item d-flex">
-										<div class="item-left">
-											<img src="{% static 'img/home1-payment-3.png' %}" alt="Payment Intro">
-										</div>
-										<div class="item-right">
-											<h3 class="title">Money Back Guarantee</h3>
-											<div class="content">Proin gravida nibh vel velit auctor aliquet. Aenean lorem quis bibendum auctor</div>
-										</div>
-									</div>
-								</div>
-								
-								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-									<div class="item d-flex">
-										<div class="item-left">
-											<img src="{% static 'img/home1-payment-4.png' %}" alt="Payment Intro">
-										</div>
-										<div class="item-right">
-											<h3 class="title">Express Shipping</h3>
-											<div class="content">Proin gravida nibh vel velit auctor aliquet. Aenean lorem quis bibendum auctor</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/png">
 
-                <!--products-->
-                <div class="container" style="margin-top: 20px">
-					<div class="row">
-						<!-- Page Content -->
-						<div id="center-column" class="col-lg-12 col-md-12">
-							<div class="product-category-page">
-								<!-- Nav Bar -->
-								<div class="products-bar">
-									<div class="row">
-										<div class="col-md-6 col-xs-6">
-											<div class="gridlist-toggle" role="tablist">
-												<ul class="nav nav-tabs">
-													<li class="active"><a href="#products-grid" data-toggle="tab" aria-expanded="true"><i class="fa fa-th-large"></i></a></li>
-													<li><a href="#products-list" data-toggle="tab" aria-expanded="false"><i class="fa fa-bars"></i></a></li>
-												</ul>
-											</div>
+    <!-- Mobile Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-											<div class="total-products">There are 12 products</div>
-										</div>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:300,400,700" rel="stylesheet">
 
-										<div class="col-md-6 col-xs-6">
-											<div class="filter-bar">
-												<form action="#" class="pull-right">
-													<div class="select">
-														<select class="form-control">
-															<option value="">Sort By</option>
-															<option value="1">Price: Lowest first</option>
-															<option value="2">Price: Highest first</option>
-															<option value="3">Product Name: A to Z</option>
-															<option value="4">Product Name: Z to A</option>
-															<option value="5">In stock</option>
-														</select>
-													</div>
-												</form>
-												<form action="#" class="pull-right">
-													<div class="select">
-														<select class="form-control">
-															<option value="">Relevance</option>
-															<option value="1">Price: Lowest first</option>
-															<option value="2">Price: Highest first</option>
-															<option value="3">Product Name: A to Z</option>
-															<option value="4">Product Name: Z to A</option>
-															<option value="5">In stock</option>
-														</select>
-													</div>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="{% static 'libs/bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'libs/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'libs/font-material/css/material-design-iconic-font.min.css' %}">
+    <link rel="stylesheet" href="{% static 'libs/nivo-slider/css/nivo-slider.css' %}">
+    <link rel="stylesheet" href="{% static 'libs/nivo-slider/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'libs/nivo-slider/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'libs/owl.carousel/assets/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'libs/slider-range/css/jslider.css' %}">
 
-								<div class="tab-content">
-									<!-- Products Grid -->
-									<div class="tab-pane active" id="products-grid">
-										<div class="products-block">
-											<div class="row">
-                                                {% for i in product %}
-												<div class="col-md-3 col-sm-4 col-xs-12">
-													<div class="product-item">
-														<div class="product-image">
-															<a href="{% url 'food_details' %}">
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/reponsive.css' %}">
+
+    <script src="{% static 'libs/jquery/jquery.js' %}"></script>
+<script src="{% static 'libs/bootstrap/js/bootstrap.js' %}"></script>
+<script src="{% static 'libs/jquery.countdown/jquery.countdown.js' %}"></script>
+<script src="{% static 'libs/nivo-slider/js/jquery.nivo.slider.js' %}"></script>
+<script src="{% static 'libs/owl.carousel/owl.carousel.min.js' %}"></script>
+<script src="{% static 'libs/slider-range/js/tmpl.js' %}"></script>
+<script src="{% static 'libs/slider-range/js/jquery.dependClass-0.1.js' %}"></script>
+<script src="{% static 'libs/slider-range/js/draggable-0.1.js' %}"></script>
+<script src="{% static 'libs/slider-range/js/jquery.slider.js' %}"></script>
+<script src="{% static 'libs/elevatezoom/jquery.elevatezoom.js' %}"></script>
+
+
+</head>
+
+<body class="home home-4">
+<div id="all">
+    <!-- Header -->
+{% include 'header.html' %}
+    {% block body %}
+        <!-- Main Content -->
+        <div id="content" class="site-content">
+            <!-- Slideshow -->
+            <div class="section slideshow">
+                <div class="container">
+                    <div class="tiva-slideshow-wrapper">
+                        <div id="tiva-slideshow" class="nivoSlider">
+                            <a href="#">
+                                <img class="img-responsive" src="{% static 'img/slideshow/home4-slideshow-1.jpg' %}"
+                                     alt="Slideshow Image">
+                            </a>
+                            <a href="#">
+                                <img class="img-responsive" src="{% static 'img/slideshow/home4-slideshow-2.jpg' %}"
+                                     alt="Slideshow Image">
+                            </a>
+                            <a href="#">
+                                <img class="img-responsive" src="{% static 'img/slideshow/home4-slideshow-3.jpg' %}"
+                                     alt="Slideshow Image">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Payment Intro -->
+            <div class="section payment-intro">
+                <div class="container">
+                    <div class="payment-wrap">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="item d-flex">
+                                    <div class="item-left">
+                                        <img src="{% static 'img/home1-payment-1.png' %}" alt="Payment Intro">
+                                    </div>
+                                    <div class="item-right">
+                                        <h3 class="title">Free Shipping item</h3>
+                                        <div class="content">Proin gravida nibh vel velit auctor aliquet. Aenean lorem
+                                            quis bibendum auctor
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="item d-flex">
+                                    <div class="item-left">
+                                        <img src="{% static 'img/home1-payment-2.png' %}" alt="Payment Intro">
+                                    </div>
+                                    <div class="item-right">
+                                        <h3 class="title">Secured Payment</h3>
+                                        <div class="content">Proin gravida nibh vel velit auctor aliquet. Aenean lorem
+                                            quis bibendum auctor
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="item d-flex">
+                                    <div class="item-left">
+                                        <img src="{% static 'img/home1-payment-3.png' %}" alt="Payment Intro">
+                                    </div>
+                                    <div class="item-right">
+                                        <h3 class="title">Money Back Guarantee</h3>
+                                        <div class="content">Proin gravida nibh vel velit auctor aliquet. Aenean lorem
+                                            quis bibendum auctor
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="item d-flex">
+                                    <div class="item-left">
+                                        <img src="{% static 'img/home1-payment-4.png' %}" alt="Payment Intro">
+                                    </div>
+                                    <div class="item-right">
+                                        <h3 class="title">Express Shipping</h3>
+                                        <div class="content">Proin gravida nibh vel velit auctor aliquet. Aenean lorem
+                                            quis bibendum auctor
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--products-->
+            <div class="container" style="margin-top: 20px">
+                <div class="row">
+                    <!-- Page Content -->
+                    <div id="center-column" class="col-lg-12 col-md-12">
+                        <div class="product-category-page">
+                            <!-- Nav Bar -->
+                            <div class="products-bar">
+                                <div class="row">
+                                    <div class="col-md-6 col-xs-6">
+                                        <div class="gridlist-toggle" role="tablist">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="#products-grid" data-toggle="tab"
+                                                                      aria-expanded="true"><i
+                                                        class="fa fa-th-large"></i></a></li>
+                                                <li><a href="#products-list" data-toggle="tab" aria-expanded="false"><i
+                                                        class="fa fa-bars"></i></a></li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="total-products">There are 12 products</div>
+                                    </div>
+
+                                    <div class="col-md-6 col-xs-6">
+                                        <div class="filter-bar">
+                                            <form action="#" class="pull-right">
+                                                <div class="select">
+                                                    <select class="form-control">
+                                                        <option value="">Sort By</option>
+                                                        <option value="1">Price: Lowest first</option>
+                                                        <option value="2">Price: Highest first</option>
+                                                        <option value="3">Product Name: A to Z</option>
+                                                        <option value="4">Product Name: Z to A</option>
+                                                        <option value="5">In stock</option>
+                                                    </select>
+                                                </div>
+                                            </form>
+                                            <form action="#" class="pull-right">
+                                                <div class="select">
+                                                    <select class="form-control">
+                                                        <option value="">Relevance</option>
+                                                        <option value="1">Price: Lowest first</option>
+                                                        <option value="2">Price: Highest first</option>
+                                                        <option value="3">Product Name: A to Z</option>
+                                                        <option value="4">Product Name: Z to A</option>
+                                                        <option value="5">In stock</option>
+                                                    </select>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-content">
+                                <!-- Products Grid -->
+                                <div class="tab-pane active" id="products-grid">
+                                    <div class="products-block">
+                                        <div class="row">
+                                            {% for i in product %}
+                                                <div class="col-md-3 col-sm-4 col-xs-12">
+                                                    <div class="product-item">
+                                                        <div class="product-image">
+                                                            <a href="{% url 'food_details' %}">
                                                                 <div style="background-image: url('media/{{ i.image }}'); background-repeat: no-repeat; background-size: cover; background-position: 50%; height:200px; width:100%; )">
 
                                                                 </div>
 
-															</a>
-														</div>
+                                                            </a>
+                                                        </div>
 
-														<div style="margin-top: 10px" class=" product-title">
-															<a href="{% url 'food_details' %}">
+                                                        <div style="margin-top: 10px" class=" product-title">
+                                                            <a id="namepr{{ i.id }}" href="{% url 'food_details' %}">
                                                                 {{ i.name }}
-															</a>
-														</div>
+                                                            </a>
+                                                        </div>
 
-														<div class="product-rating">
-															<div class="star on"></div>
-															<div class="star on"></div>
-															<div class="star on "></div>
-															<div class="star on"></div>
-															<div class="star"></div>
-														</div>
+                                                        <div class="product-rating">
+                                                            <div class="star on"></div>
+                                                            <div class="star on"></div>
+                                                            <div class="star on "></div>
+                                                            <div class="star on"></div>
+                                                            <div class="star"></div>
+                                                        </div>
 
-														<div class="product-price">
-															<span class="sale-price">{{ i.price }}TK</span>
-															<span class="base-price">{{ i.price }}TK</span>
-														</div>
+                                                        <div class="product-price">
+                                                            <span class="sale-price" id="pricepr{{ i.id }}">{{ i.price }}TK</span>
+                                                            <span class="base-price">{{ i.price }}TK</span>
+                                                        </div>
 
-														<div class="product-buttons">
-															<a class="add-to-cart" href="#">
-																<i class="fa fa-shopping-basket" aria-hidden="true"></i>
-															</a>
+                                                        <div class="product-buttons">
+                                                            <button id="pr{{ i.id }}" class="add-to-cart cart" href="#">
+                                                                <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
 
-															<a class="add-wishlist" href="#">
-																<i class="fa fa-heart" aria-hidden="true"></i>
-															</a>
+                                
 
-															<a class="quickview" href="#">
-																<i class="fa fa-eye" aria-hidden="true"></i>
-															</a>
-														</div>
-													</div>
-												</div>
-                                                {% endfor %}
+                                <!-- Pagination Bar -->
+                                <div class="pagination-bar">
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <div class="text">Showing 1-12 of 20 item(s)</div>
+                                        </div>
+
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <div class="pagination">
+                                                <ul class="page-list">
+                                                    <li><a href="#" class="prev">Previous</a></li>
+                                                    <li><a href="#" class="current">1</a></li>
+                                                    <li><a href="#">2</a></li>
+                                                    <li><a href="#" class="next">Next</a></li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                                    <!-- Products List -->
-									<div class="tab-pane" id="products-list">
-										<div class="products-block layout-5">
-											<div class="product-item">
-                                                {% for i in product %}
-												<div style="margin-top: 5px" class="row">
-													<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
-														<div class="product-image">
-															<a href="{% url 'food_details' %}">
-																<div style="background-image: url('media/{{ i.image }}'); background-repeat: no-repeat; background-size: cover; background-position: 50%; height:200px; width:100%; )">
 
-                                                                </div>
-															</a>
-														</div>
-													</div>
+            <!-- Product - Our Products -->
 
-													<div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
-														<div class="product-info">
-															<div class="product-title">
-																<a href="{% url 'food_details' %}">
-																	{{ i.name }}
-																</a>
-															</div>
-
-															<div class="product-rating">
-																<div class="star on"></div>
-																<div class="star on"></div>
-																<div class="star on "></div>
-																<div class="star on"></div>
-																<div class="star"></div>
-																<span class="review-count">(3 Reviews)</span>
-															</div>
-
-															<div class="product-price">
-																<span class="sale-price">{{ i.price }}</span>
-																<span class="base-price">{{ i.price }}</span>
-															</div>
-
-															<div class="product-stock">
-																<i class="fa fa-check-square-o" aria-hidden="true"></i>In stock
-															</div>
-
-															<div class="product-description">
-																Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sapien urna, commodo ut molestie vitae, feugiat tincidunt ligula...
-															</div>
-
-															<div class="product-buttons">
-																<a class="add-to-cart" href="#">
-																	<i class="fa fa-shopping-basket" aria-hidden="true"></i>
-																	<span>Add To Cart</span>
-																</a>
-
-																<a class="add-wishlist" href="#">
-																	<i class="fa fa-heart" aria-hidden="true"></i>
-																</a>
-
-																<a class="quickview" href="#">
-																	<i class="fa fa-eye" aria-hidden="true"></i>
-																</a>
-															</div>
-														</div>
-													</div>
-												</div>
-                                                {% endfor %}
-											</div>
-                                        </div>
+            <!-- Intro -->
+            <div class="section intro">
+                <div class="block-content">
+                    <div class="container">
+                        <div class="intro-wrap">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 text-center">
+                                    <div class="intro-header">
+                                        <h3>Why Choose Us</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                                            quis nostrud</p>
                                     </div>
+                                    <div class="intro-social">
+                                        <ul>
+                                            <li><a href="#"><img src="{% static 'img/intro-social-1.png' %}"
+                                                                 alt="Social Item"></a></li>
+                                            <li><a href="#"><img src="{% static 'img/intro-social-2.png' %}"
+                                                                 alt="Social Item"></a></li>
+                                            <li><a href="#"><img src="{% static 'img/intro-social-3.png' %}"
+                                                                 alt="Social Item"></a></li>
+                                            <li><a href="#"><img src="{% static 'img/intro-social-4.png' %}"
+                                                                 alt="Social Item"></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
 
-                                    <!-- Pagination Bar -->
-								<div class="pagination-bar">
-									<div class="row">
-										<div class="col-md-4 col-sm-4 col-xs-12">
-											<div class="text">Showing 1-12 of 20 item(s)</div>
-										</div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 top-left text-center">
+                                    <div class="intro-item">
+                                        <p><img src="{% static 'img/intro-icon-1.png' %}" alt="Intro Image"></p>
+                                        <h4>Always Fresh</h4>
+                                        <p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua.</p>
+                                    </div>
+                                </div>
 
-										<div class="col-md-8 col-sm-8 col-xs-12">
-											<div class="pagination">
-												<ul class="page-list">
-													<li><a href="#" class="prev">Previous</a></li>
-													<li><a href="#" class="current">1</a></li>
-													<li><a href="#">2</a></li>
-													<li><a href="#" class="next">Next</a></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-				
-				
-				<!-- Product - Our Products -->
-				
-				<!-- Intro -->
-				<div class="section intro">
-					<div class="block-content">
-						<div class="container">
-							<div class="intro-wrap">
-								<div class="row">
-									<div class="col-lg-12 col-md-12 text-center">							
-										<div class="intro-header">
-											<h3>Why Choose Us</h3>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud</p>
-										</div>
-										<div class="intro-social">
-											<ul>
-												<li><a href="#"><img src="{% static 'img/intro-social-1.png' %}" alt="Social Item"></a></li>
-												<li><a href="#"><img src="{% static 'img/intro-social-2.png' %}" alt="Social Item"></a></li>
-												<li><a href="#"><img src="{% static 'img/intro-social-3.png' %}" alt="Social Item"></a></li>
-												<li><a href="#"><img src="{% static 'img/intro-social-4.png' %}" alt="Social Item"></a></li>
-											</ul>
-										</div>
-									</div>
-									
-									<div class="col-lg-6 col-md-6 col-sm-6 top-left text-center">
-										<div class="intro-item">
-											<p><img src="{% static 'img/intro-icon-1.png' %}" alt="Intro Image"></p>
-											<h4>Always Fresh</h4>
-											<p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-										</div>
-									</div>
-									
-									<div class="col-lg-6 col-md-6 col-sm-6 top-right text-center">
-										<div class="intro-item">
-											<p><img src="{% static 'img/intro-icon-2.png' %}" alt="Intro Image"></p>
-											<h4>100% Natural</h4>
-											<p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-										</div>
-									</div>
-									
-									<div class="col-lg-6 col-md-6 col-sm-6 bottom-left text-center">
-										<div class="intro-item">
-											<p><img src="{% static 'img/intro-icon-3.png' %}" alt="Intro Image"></p>
-											<h4>Super Healthy</h4>
-											<p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-										</div>
-									</div>
-																	
-									<div class="col-lg-6 col-md-6 col-sm-6 bottom-right text-center">
-										<div class="intro-item">
-											<p><img src="{% static 'img/intro-icon-4.png' %}" alt="Intro Image"></p>
-											<h4>Premium Quality</h4>
-											<p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			{% endblock body %}
+                                <div class="col-lg-6 col-md-6 col-sm-6 top-right text-center">
+                                    <div class="intro-item">
+                                        <p><img src="{% static 'img/intro-icon-2.png' %}" alt="Intro Image"></p>
+                                        <h4>100% Natural</h4>
+                                        <p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua.</p>
+                                    </div>
+                                </div>
 
-			<!-- Footer -->
-			<footer id="footer">
-				<div class="footer">
-					<div class="container">
-						<div class="footer-wrap">
-							<div class="row">
-								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 footer-col">
-									<div class="block text">
-										<div class="block-content">
-											<a href="{% url 'index' %}" class="logo-footer">
-												<img src="{% static 'img/logo-3.png' %}" alt="Logo">
-											</a>
-											
-											<p>Lorem ipsum dolor sit amet, consectetur adipisc ing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-											<p>Ut enim ad minim veniam, quis nostrud exercita tion ullamco laboris nisi ut aliquip.</p>
-										</div>
-									</div>
-								</div>
-								
-								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 footer-col">
-									<div class="block newsletter">
-										<h2 class="block-title">Complains</h2>
-										
-										<div class="block-content">
-											<p class="description">Provide your valuable complains for us to fix</p>
-											<form action="#" method="post">
-												<input type="text" placeholder="Enter Your Thoughts">
-												<button type="submit" class="btn btn-primary">Submit</button>
-											</form>
-										</div>
-									</div>
-								</div>
-								
-								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 footer-col">
-									<div class="block text">
-										<h2 class="block-title">Opening Hours</h2>
-										
-										<div class="block-content">
-											<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
-											<p>
-												<strong>Monday To Friday</strong> : 8.00 AM - 8.00 PM<br>
-												<strong>Satuday</strong> : 7.30 AM - 9.30 PM<br>
-												<strong>Sunday</strong> : 7.00 AM - 10.00 PM
-											</p>
-										</div>
-									</div>
-								</div>
-								
-								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 footer-col">
-									<div class="block text">
-										<h2 class="block-title">Contact Us</h2>
-										
-										<div class="block-content">
-											<div class="contact">
-												<p><strong>Address</strong> : 123 Suspendis matti, VST District, NY Accums, North American</p>
-												<p><strong>Hotline</strong> : 012345678910 - 098765432100</p>
-												<p><strong>Email</strong> : <a href="mailto:support@domain.com">support@domain.com</a></p>
-											</div>
-                                            <a href="/vendor/login">Vendor Login</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>		
-				</div>
-				
-				<!-- Copyright -->
+                                <div class="col-lg-6 col-md-6 col-sm-6 bottom-left text-center">
+                                    <div class="intro-item">
+                                        <p><img src="{% static 'img/intro-icon-3.png' %}" alt="Intro Image"></p>
+                                        <h4>Super Healthy</h4>
+                                        <p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua.</p>
+                                    </div>
+                                </div>
 
-			</footer>
-			
-			
-			<!-- Go Up button -->
-			<div class="go-up">
-				<a href="#">
-					<i class="fa fa-long-arrow-up"></i>
-				</a>
-			</div>
-			
-			<!-- Page Loader -->
-			<div id="page-preloader">
-				<div class="page-loading">
-					<div class="dot"></div>
-					<div class="dot"></div>
-					<div class="dot"></div>
-					<div class="dot"></div>
-					<div class="dot"></div>
-				</div>
-			</div>
-		</div>
-		
-		<!-- Vendor JS -->
-		<script src="{% static 'libs/jquery/jquery.js' %}"></script>
-		<script src="{% static 'libs/bootstrap/js/bootstrap.js' %}"></script>
-		<script src="{% static 'libs/jquery.countdown/jquery.countdown.js' %}"></script>
-		<script src="{% static 'libs/nivo-slider/js/jquery.nivo.slider.js' %}"></script>
-		<script src="{% static 'libs/owl.carousel/owl.carousel.min.js' %}"></script>
-		<script src="{% static 'libs/slider-range/js/tmpl.js' %}"></script>
-		<script src="{% static 'libs/slider-range/js/jquery.dependClass-0.1.js' %}"></script>
-		<script src="{% static 'libs/slider-range/js/draggable-0.1.js' %}"></script>
-		<script src="{% static 'libs/slider-range/js/jquery.slider.js' %}"></script>
-		<script src="{% static 'libs/elevatezoom/jquery.elevatezoom.js' %}"></script>
-		
-		<!-- Template CSS -->
-		<script src="{% static 'js/main.js' %}"></script>
-	</body>
-	
+                                <div class="col-lg-6 col-md-6 col-sm-6 bottom-right text-center">
+                                    <div class="intro-item">
+                                        <p><img src="{% static 'img/intro-icon-4.png' %}" alt="Intro Image"></p>
+                                        <h4>Premium Quality</h4>
+                                        <p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor
+                                            incididunt ut labore et dolore magna aliqua.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock body %}
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="footer">
+            <div class="container">
+                <div class="footer-wrap">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 footer-col">
+                            <div class="block text">
+                                <div class="block-content">
+                                    <a href="{% url 'index' %}" class="logo-footer">
+                                        <img src="{% static 'img/logo-3.png' %}" alt="Logo">
+                                    </a>
+
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisc ing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua.</p>
+                                    <p>Ut enim ad minim veniam, quis nostrud exercita tion ullamco laboris nisi ut
+                                        aliquip.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 footer-col">
+                            <div class="block newsletter">
+                                <h2 class="block-title">Complains</h2>
+
+                                <div class="block-content">
+                                    <p class="description">Provide your valuable complains for us to fix</p>
+                                    <form action="#" method="post">
+                                        <input type="text" placeholder="Enter Your Thoughts">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 footer-col">
+                            <div class="block text">
+                                <h2 class="block-title">Opening Hours</h2>
+
+                                <div class="block-content">
+                                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                                        fugiat nulla pariatur. </p>
+                                    <p>
+                                        <strong>Monday To Friday</strong> : 8.00 AM - 8.00 PM<br>
+                                        <strong>Satuday</strong> : 7.30 AM - 9.30 PM<br>
+                                        <strong>Sunday</strong> : 7.00 AM - 10.00 PM
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 footer-col">
+                            <div class="block text">
+                                <h2 class="block-title">Contact Us</h2>
+
+                                <div class="block-content">
+                                    <div class="contact">
+                                        <p><strong>Address</strong> : 123 Suspendis matti, VST District, NY Accums,
+                                            North American</p>
+                                        <p><strong>Hotline</strong> : 012345678910 - 098765432100</p>
+                                        <p><strong>Email</strong> : <a href="mailto:support@domain.com">support@domain.com</a>
+                                        </p>
+                                    </div>
+                                    <a href="/vendor/login">Vendor Login</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+
+    </footer>
 
 
-</html>					
+    <!-- Go Up button -->
+    <div class="go-up">
+        <a href="#">
+            <i class="fa fa-long-arrow-up"></i>
+        </a>
+    </div>
+
+    <!-- Page Loader -->
+    <div id="page-preloader">
+        <div class="page-loading">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Vendor JS -->
+
+
+<!-- Template CSS -->
+<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/extra.js' %}"></script>
+
+<script>
+
+</script>
+</body>
+
+
+</html>
+
+
+

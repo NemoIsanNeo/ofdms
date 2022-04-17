@@ -1,9 +1,11 @@
 from django.urls import path
 from . import views
 from vendor import views as vviews
+from django.contrib.auth.views import LogoutView, LoginView
+
 
 urlpatterns = [path('', views.index, name='index'),path('index', views.index, name='index'),
-               path('login/', views.login, name='login'),
+               path('login/', LoginView.as_view(template_name='login.html'), name='login'),
                path('register/', views.register, name='register'),
                path('account/', views.account, name='account'),
                path('cart_details', views.cart_details, name='cart_details'),

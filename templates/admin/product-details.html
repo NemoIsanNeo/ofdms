@@ -10,6 +10,13 @@
   
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style type="text/css">
+        .custom-td
+        {
+                    display: block;
+    overflow-y: scroll;
+    height: 75px;
+    width: 270px;
+        }
         #cke_id_description
         {
             width: 565px!important;
@@ -71,7 +78,9 @@
   </head>
 <br><br>
 
-  <div class="container">
+    {% include 'admin/sidebar.html' %}
+
+  <div class="container-fluid">
     <div class="text-center">
         <!-- Trigger the modal with a button -->
           <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Products</button>
@@ -151,7 +160,7 @@
                  <td>{{ i.category }}</td>
                  <td>{{ i.price }} TK</td>
                  <td>{% if i.created_by %} {{i.created_by}} {% else %} Admin {% endif %} </td>
-                 <td> {{i.description|safe}}  </td>
+                 <td class="custom-td"> {{i.description|safe}}  </td>
                   <td class="text-center">{% if i.status == '0' %}<p class=" btn btn-warning">Pending</p> {% elif i.status == '1' %} <p class=" btn btn-success">Accepted</p> {% else %} <p class=" btn btn-danger">Rejected</p> {% endif %}</td>
                   <td class="text-center">
                       {% if i.status == '0' %}
