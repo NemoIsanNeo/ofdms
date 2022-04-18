@@ -1,0 +1,66 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block body %}
+
+
+
+
+
+    <div id="content" class="site-content">
+        <!-- Breadcrumb -->
+        <div id="breadcrumb">
+            <div class="container">
+                <h2 class="title">ORDER LIST</h2>
+
+                <ul class="breadcrumb">
+                    <li><a href="#" title="Home">Home</a></li>
+                    <li><span>ORDER LIST</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container">
+
+
+
+    <main id="print_area">
+      <table border="0" cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <th class="no">#</th>
+            <th class="desc">ORDER NO</th>
+            <th class="unit">ITEM</th>
+            <th class="qty">QUANTITY</th>
+            <th class="unit">DATE</th>
+            <th class="total">TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for i in datalist %}
+          <tr>
+            <td class="no">{{ forloop.counter }}</td>
+            <td class="desc"><a href="/invoice/{{ i.order_no }}"><h3>#SI-{{ i.order_no }}</h3></a></td>
+            <td class="unit">{{ i.item }}</td>
+            <td class="qty">{{ i.qty }}</td>
+            <td class="unit">{{ i.date }}</td>
+            <td class="total">{{ i.total }} TK</td>
+          </tr>
+        {% endfor %}
+
+        </tbody>
+
+
+      </table>
+
+    </main>
+
+
+        </div>
+    </div>
+
+
+    <br>
+    <br>
+    <br>
+{% endblock body %}

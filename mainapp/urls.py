@@ -8,6 +8,8 @@ urlpatterns = [path('', views.index, name='index'),path('index', views.index, na
                path('login/', LoginView.as_view(template_name='login.html'), name='login'),
                path('register/', views.register, name='register'),
                path('account/', views.account, name='account'),
+               path('index/', views.index, name='index'),
+               path('order/', views.order, name='order'),
                path('cart_details', views.cart_details, name='cart_details'),
                path('checkout/', views.checkout, name='checkout'),
                path('food_details/', views.food_details, name='food_details'),
@@ -15,6 +17,7 @@ urlpatterns = [path('', views.index, name='index'),path('index', views.index, na
                path('after_login', views.afterlogin_view, name='after_login'),
                path('admin-dashboard', views.admin_dashboard_view, name='admin-dashboard'),
                path('sadmin/product-details/', views.product_details, name='product-details'),
+               path('sadmin/product-orders/', views.product_orders, name='product-details'),
                path('sadmin/product-category/', views.cat_details, name='product-details'),
                path('product-category/delete/<int:pk>', views.delete_product_category, name='product-delete'),
 
@@ -26,5 +29,6 @@ urlpatterns = [path('', views.index, name='index'),path('index', views.index, na
                path('vendor/accept/<int:pk>', views.accept_vendor, name='vendor-accept'),
                path('vendor/reject/<int:pk>', views.reject_vendor, name='product-reject'),
                path('vendor/delete/<int:pk>', views.delete_vendor, name='product-delete'),
+               path('invoice/<int:pk>', views.invoice, name='product-delete'),
 
                ]

@@ -1,7 +1,7 @@
-{% extends 'vendor/base.html' %}
+{% extends 'admin/base.html' %}
 {% load widget_tweaks %}
+{% load static %}
 {% block content %}
-    {% load static %}
 
 
 <head>
@@ -10,6 +10,17 @@
   
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style type="text/css">
+        .custom-td
+        {
+                    display: block;
+    overflow-y: scroll;
+    height: 75px;
+    width: 270px;
+        }
+        #cke_id_description
+        {
+            width: 565px!important;
+        }
       a:link {
         text-decoration: none;
       }
@@ -17,10 +28,6 @@
       .order-card {
         color: rgb(255, 255, 255);
       }
-       #cke_id_description
-        {
-            width: 565px!important;
-        }
   
       .bg-c-blue {
         background: #04868f;
@@ -49,7 +56,7 @@
       }
   
       .card .card-block {
-        padding: 45px;
+        padding: 25px;
       }
   
       .order-card i {
@@ -71,7 +78,9 @@
   </head>
 <br><br>
 
-  <div class="container">
+    {% include 'admin/sidebar.html' %}
+
+  <div class="container-fluid">
     <div class="text-center">
         <!-- Trigger the modal with a button -->
           <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Products</button>
@@ -114,7 +123,6 @@
                         <label for="mobile"><p>Product Description</p></label><br>
                         {% render_field product_form.description|attr:'required:true' class="form-control" placeholder="Contact Number" %}
                     </div>
-
                     <br>
 
 
@@ -137,19 +145,37 @@
                  <th scope="col">Name</th>
                  <th scope="col">Category</th>
                  <th scope="col">Price</th>
-                 <th scope="col">Status</th>
-                 <th scope="col">Action</th>
+                 <th scope="col">Vendor</th>
+                 <th scope="col">Description</th>
+                                  <th scope="col">Status</th>
+                                  <th scope="col">Action</th>
+
              </tr>
              </thead>
              <tbody>
-             {% for i in product %}
-             <tr>
+             {% for i in order %}
+             <tr style="height: 20px">
                  <th scope="row">{{ forloop.counter }}</th>
                  <td>{{ i.name }}</td>
                  <td>{{ i.category }}</td>
                  <td>{{ i.price }} TK</td>
-                 <td class="text-center">{% if i.status == '0' %}<p class=" btn btn-warning">Pending</p> {% endif %}</td>
-                 <td class="text-center"><a href="/vendor/product-edit/{{ i.id }}"><i class="fas fa-edit"></i></a> <a href=""><i class="fas fa-trash-alt"></i></a></td>
+                 <td>{% if i.created_by %} {{i.created_by}} {% else %} Admin {% endif %} </td>
+                 <td class="custom-td"> {{i.description|safe}}  </td>
+                  <td class="text-center">{% if i.status == '0' %}<p class=" btn btn-warning">Pending</p> {% elif i.status == '1' %} <p class=" btn btn-success">Accepted</p> {% else %} <p class=" btn btn-danger">Rejected</p> {% endif %}</td>
+                  <td class="text-center">
+                      {% if i.status == '0' %}
+                      <a class="btn btn-success" href="/product/accept/{{ i.id }}">Accept</a>
+                      <a class="btn btn-warning" href="/product/reject/{{ i.id }}">Reject</a>
+                      <a class="btn btn-danger" href="/product/delete/{{ i.id }}">Delete</a>
+                      {% elif i.status == '1' %}
+                           <a class="btn btn-warning" href="/product/reject/{{ i.id }}">Reject</a>
+                            <a class="btn btn-danger" href="/product/delete/{{ i.id }}">Delete</a>
+                          {% else %}
+                            <a class="btn btn-success" href="/product/accept/{{ i.id }}">Accept</a>
+                            <a class="btn btn-danger" href="/product/delete/{{ i.id }}">Delete</a>
+
+                      {% endif %}
+                  </td>
 
              </tr>
              {% endfor %}
@@ -163,8 +189,7 @@
 <br><br><br><br><br><br><br><br><br><br>
 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
 <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
-
 
 {% endblock content %}

@@ -11,14 +11,14 @@ class Users(models.Model):
 
     @property
     def get_name(self):
-        return self.company_name
+        return self.first_name
 
     @property
     def get_instance(self):
         return self
 
     def __str__(self):
-        return self.company_name
+        return self.first_name + self.last_name
 
 
 
@@ -34,3 +34,7 @@ class Orders(models.Model):
     state=models.CharField(max_length=111)
     zip_code=models.CharField(max_length=111)
     phone=models.CharField(max_length=111)
+    status=models.CharField(max_length=111,default=0)
+    payment_type=models.CharField(max_length=111,default=0)
+    payment_ref=models.CharField(max_length=111,default=0)
+    date=models.CharField(max_length=111,default=0)

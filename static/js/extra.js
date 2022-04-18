@@ -105,3 +105,26 @@ if ($.isEmptyObject(cart)) {
 
 
  $('#itemsJson').val(JSON.stringify(cart));
+
+
+            $('.bk_ref').hide();
+
+    $("#bkash").click(function() {
+        $('.bk_ref').show();
+    });
+    $("#cash").click(function() {
+        $('.bk_ref').hide();
+    });
+
+
+    $('#print').click(function () {
+        var tableData = 		document.getElementById('print_area').innerHTML;
+		var styleData = document.getElementsByTagName("style")[0].innerHTML;
+		var printWindow = window.open("", "", "width=800, height=600");
+		printWindow.document.write('<style>' + styleData + '<\/style>' + tableData);
+    })
+
+    function printTable() {
+
+	 }
+

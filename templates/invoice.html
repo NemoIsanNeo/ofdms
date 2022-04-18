@@ -1,0 +1,101 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block body %}
+
+
+
+
+
+    <div id="content" class="site-content">
+        <!-- Breadcrumb -->
+        <div id="breadcrumb">
+            <div class="container">
+                <h2 class="title">Sale Invoice</h2>
+
+                <ul class="breadcrumb">
+                    <li><a href="#" title="Home">Home</a></li>
+                    <li><span>Invoice</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container">
+
+            
+
+    <main id="print_area">
+      <div id="details" class="clearfix">
+        <div id="client">
+          <div class="to">INVOICE TO:</div>
+          <h2 class="name">{{ user }}</h2>
+          <div class="address">{{ user.mobile }}</div>
+          <div class="email"><a href="mailto:john@example.com">{{ user.emails }}</a></div>
+        </div>
+        <div id="invoice">
+          <h1>INVOICE #SI-{{ order.order_id }}</h1>
+          <div class="date">Date of Invoice: {{ order.date }}</div>
+        </div>
+      </div>
+      <table border="0" cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <th class="no">#</th>
+            <th class="desc">DESCRIPTION</th>
+            <th class="desc">CATEGORY</th>
+            <th class="unit">UNIT PRICE</th>
+            <th class="qty">QUANTITY</th>
+            <th class="total">TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for i in data %}
+          <tr>
+            <td class="no">{{ forloop.counter }}</td>
+            <td class="desc"><h3>{{ i.name }}</h3>{{ i.description|safe }}</td>
+            <td class="desc"><h3>{{ i.category }}</h3></td>
+            <td class="unit">{{ i.price }} TK</td>
+            <td class="qty">{{ i.qty }}</td>
+            <td class="total">{{ i.total }} TK</td>
+          </tr>
+        {% endfor %}
+
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2"></td>
+            <td colspan="2">SUBTOTAL</td>
+            <td>{{ subtotal }} Taka</td>
+          </tr>
+
+          <tr>
+            <td colspan="2"></td>
+            <td colspan="2">GRAND TOTAL</td>
+            <td>{{ subtotal }} Taka</td>
+          </tr>
+        </tfoot>
+
+      </table>
+      <div id="thanks">Thank you!</div>
+        <button id="print" style="float: right; margin-top: 10px" class="btn btn-info">Print PDF<i class="fa fa-print" aria-hidden="true"></i></button>
+
+
+
+    </main>
+    <footer>
+      Invoice was created on a computer and is valid without the signature and seal.
+    </footer>
+
+
+        </div>
+    </div>
+
+
+    <br>
+    <br>
+    <br>
+    <script>
+        {% if order %}
+        {%endif%}
+    </script>
+{% endblock body %}

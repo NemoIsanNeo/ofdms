@@ -15,5 +15,19 @@
     </div>
 </div>
 
+        <div style="padding: 2rem" class="container">
+           <div class="row justify-content-center align-items-center d-flex padding-15">
+               <div class="col-md-8">
+                   <div style="border: 2px solid #000000; width: fit-content; padding: 2rem">
+                       <img style="padding: 1rem" height="100" width="100" src="{% static 'img/profile.png' %}" alt="">
+                   <h3 style="font-size: 4rem; text-transform: uppercase; line-height: 35px; margin: 0;" class="text-info">{{ user }}</h3>
+                   <h3 style="font-size: 2rem; text-transform: uppercase; line-height: 35px; margin: 0" class="text-info">{{ user.user.email }}</h3>
+                   <h3 style="font-size: 2rem; text-transform: uppercase; line-height: 25px; margin: 0" class="text-info">{{ user.mobile }}</h3>
+                   </div>
+
+               </div>
+           </div>
+        </div>
+
 
 {% endblock body %}
