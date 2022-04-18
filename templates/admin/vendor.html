@@ -99,7 +99,7 @@
                   <td class="text-center">{% if i.status == '0' %}<p class=" btn btn-warning">Pending</p> {% elif i.status == '1' %} <p class=" btn btn-success">Accepted</p> {% else %} <p class=" btn btn-danger">Rejected</p> {% endif %}</td>
                  <td class="text-center">
                      {% if i.status == '0' %}
-                         <a class="btn btn-success" href="/vendor/accept/{{ i.user.id }}">Accept</a>
+                         <a class="btn btn-success" href="/vendor/accept/{{ i.id }}">Accept</a>
                          <a class="btn btn-warning" href="/vendor/reject/{{ i.id }}">Reject</a>
                          <a class="btn btn-danger" href="/vendor/delete/{{ i.id }}">Delete</a>
                      {% elif i.status == '1' %}

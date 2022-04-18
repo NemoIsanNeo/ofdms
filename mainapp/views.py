@@ -52,19 +52,20 @@ def order(request):
 
         subtotal = 0
         qty = 0
+        qty2 = 0
         for i in item:
             id = i.split("pr")[1]
             qty1 = item[i][0]
             price = pmodel.Product.objects.get(id=id).price
             total = int(qty1) * int(price)
             qty = qty + 1
-            qty1 += qty1
+            qty2 += qty1
 
             subtotal = subtotal + total
         datadict = {
             'order_no': j.order_id,
             'item': qty,
-            'qty':qty1,
+            'qty':qty2,
             'total': subtotal,
             'date':j.date
         }
