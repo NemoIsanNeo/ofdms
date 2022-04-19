@@ -41,3 +41,6 @@ class Orders(models.Model):
     payment_ref=models.CharField(max_length=111,default=0)
     date=models.CharField(max_length=111,default=0)
     dman = models.ForeignKey(Delivery, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return 'SI-'+str(self.order_id)

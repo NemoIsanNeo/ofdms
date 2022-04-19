@@ -67,7 +67,7 @@
             {% include 'admin/sidebar.html' %}
 
 
-  <div class="container">
+  <div style="margin-top: 20px" class="container">
     <div class="row">
       
   
@@ -75,7 +75,7 @@
         <div class="card bg-c-blue order-card">
           <div class="card-block">
             <h6 class="mb-4">Total Vendor</h6>
-           <h2 class="text-right"><i class="fas fa-book f-left"></i><span></span></h2>
+           <h2 class="text-right"><i class="fas fa-book f-left"></i><span>{{ vendor }}</span></h2>
           </div>
         </div>
       </div>
@@ -84,7 +84,7 @@
         <div class="card bg-c-yellow order-card">
           <div class="card-block">
             <h6 class="mb-5">Total Delivery Man</h6>
-            <h2 class="text-right"><i class="fas fa-question-circle f-left"></i><span></span></h2>
+            <h2 class="text-right"><i class="fas fa-question-circle f-left"></i><span>{{ dman }}</span></h2>
             
           </div>
         </div>
@@ -93,8 +93,8 @@
         <div class="col-md-4 col-xl-6">
         <div class="card bg-c-yellow order-card">
           <div class="card-block">
-            <h6 class="mb-5">Total Today Order</h6>
-            <h2 class="text-right"><i class="fas fa-question-circle f-left"></i><span></span></h2>
+            <h6 class="mb-5">Total Order</h6>
+            <h2 class="text-right"><i class="fas fa-question-circle f-left"></i><span>{{ order }}</span></h2>
 
           </div>
         </div>

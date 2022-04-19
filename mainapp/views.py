@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
+from deliveryman.forms import DtDmanForm
 from mainapp.models import Orders
 from . import models
 from product import models as pmodel
@@ -258,7 +259,11 @@ def afterlogin_view(request):
 
 
 def admin_dashboard_view(request):
-    dict = {}
+    vendor = vmodel.Vendor.objects.all().count()
+    dman = dmodel.Delivery.objects.all().count()
+    order = models.Orders.objects.all().count()
+
+    dict = {'vendor':vendor,'dman':dman,'order':order}
 
     return render(request,'admin/dashboard.html',context=dict)
 
@@ -305,9 +310,11 @@ def product_details(request):
 
 @login_required(login_url='adminlogin')
 def product_orders(request):
+    dtoform = DtDmanForm()
     order = models.Orders.objects.all()
-    dict = {'order': order}
+    dict = {'order': order,'dtoform':dtoform}
     datalist = []
+
     for j in order:
         item = json.loads(j.items_json)
 
@@ -329,10 +336,20 @@ def product_orders(request):
             'qty': qty2,
             'total': subtotal,
             'date': j.date,
-            'status': 'Pending' if j.status == '0' else 'Delivered'
+            'status': 'Pending' if j.status == '0' else 'Delivered',
+            'dman':j.dman
         }
         datalist.append(datadict)
     dict.update({'datalist': datalist})
+
+    if request.POST:
+        order_form = DtDmanForm(request.POST)
+        if order_form.is_valid():
+            order = models.Orders.objects.get(order_id=request.POST.get('order_id'))
+            order.dman = dmodel.Delivery.objects.get(id=request.POST.get('dman_id'))
+            order.save()
+
+
     return render(request,'admin/order-details.html',context=dict)
 
 

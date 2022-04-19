@@ -79,3 +79,42 @@ def edit(request, pk):
 
     return render(request, 'vendor/edit-product.html', context=dict)
 
+
+
+@login_required(login_url='vendor/login')
+@user_passes_test(is_dman)
+def product_orders(request):
+    from mainapp.models import Orders
+    order = Orders.objects.all().filter(dman=models.Delivery.objects.get(user=request.user.id))
+    dict = {'order': order}
+    datalist = []
+    import json
+
+    for j in order:
+        item = json.loads(j.items_json)
+
+        subtotal = 0
+        qty = 0
+        qty2 = 0
+        for i in item:
+            id = i.split("pr")[1]
+            qty1 = item[i][0]
+            price = pmodel.Product.objects.get(id=id).price
+            total = int(qty1) * int(price)
+            qty = qty + 1
+            qty2 += qty1
+
+            subtotal = subtotal + total
+        datadict = {
+            'order_no': j.order_id,
+            'item': qty,
+            'qty': qty2,
+            'total': subtotal,
+            'date': j.date,
+            'status': 'Pending' if j.status == '0' else 'Delivered',
+        }
+        datalist.append(datadict)
+    dict.update({'datalist': datalist})
+
+
+    return render(request,'delivery/order-details.html',context=dict)
