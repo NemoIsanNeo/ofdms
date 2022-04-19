@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from deliveryman.models import Delivery
+
 
 
 class Users(models.Model):
@@ -38,3 +40,4 @@ class Orders(models.Model):
     payment_type=models.CharField(max_length=111,default=0)
     payment_ref=models.CharField(max_length=111,default=0)
     date=models.CharField(max_length=111,default=0)
+    dman = models.ForeignKey(Delivery, on_delete=models.CASCADE, null=True)

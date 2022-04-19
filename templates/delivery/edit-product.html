@@ -1,6 +1,5 @@
-{% extends 'admin/base.html' %}
+{% extends 'delivery/base.html' %}
 {% load widget_tweaks %}
-{% load static %}
 {% block content %}
 
 
@@ -10,17 +9,6 @@
   
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style type="text/css">
-        .custom-td
-        {
-                    display: block;
-    overflow-y: scroll;
-    height: 75px;
-    width: 270px;
-        }
-        #cke_id_description
-        {
-            width: 565px!important;
-        }
       a:link {
         text-decoration: none;
       }
@@ -56,7 +44,7 @@
       }
   
       .card .card-block {
-        padding: 25px;
+        padding: 45px;
       }
   
       .order-card i {
@@ -78,46 +66,40 @@
   </head>
 <br><br>
 
-    {% include 'admin/sidebar.html' %}
-
-  <div class="container-fluid">
+  <div class="container">
     <div class="text-center">
         <!-- Trigger the modal with a button -->
-        <h4>Order List</h4>
+        <h1>Edit Product</h1>
     </div>
 
 
 
-  <!-- Modal -->
 
-    <!-- table -->
      <div style="margin-top: 3rem">
-         <table class="table table-bordered">
-             <thead class="thead-light">
-               <tr>
-            <th>#</th>
-            <th >ORDER NO</th>
-            <th >ITEM</th>
-            <th >QUANTITY</th>
-            <th >DATE</th>
-            <th >STATUS</th>
-            <th >TOTAL</th>
-          </tr>
-             </thead>
-             <tbody>
-             {% for i in datalist %}
-          <tr>
-            <td class="no">{{ forloop.counter }}</td>
-            <td class="desc"><a href="/sadmin/invoice/{{ i.order_no }}"><strong>#SI-{{ i.order_no }}</strong></a></td>
-            <td class="unit">{{ i.item }}</td>
-            <td class="qty">{{ i.qty }}</td>
-            <td class="unit">{{ i.date }}</td>
-            <td class="qty">{{ i.status }}</td>
-            <td class="total">{{ i.total }} TK</td>
-          </tr>
-        {% endfor %}
-             </tbody>
-         </table>
+          <form method="POST" autocomplete="off" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username">Product Name</label>
+                        {% render_field product_form.name class="form-control" placeholder="Product Name" %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username">Category</label>
+                        {% render_field product_form.cat_id class="form-control" placeholder="Username" %}
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Price</label>
+                        {% render_field product_form.price class="form-control" placeholder="Price" %}
+                    </div>
+                    <div class="form-group ">
+                        <label for="mobile">Product Image</label>
+                        {% render_field product_form.image class="form-control" placeholder="Contact Number" %}
+                    </div>
+                    <br>
+
+
+                    <button type="submit" class="btn  btn-success text-center" style="border-radius: 0%;">Update</button>
+                </form>
      </div>
     <!-- table -->
   </div>
@@ -126,7 +108,6 @@
 <br><br><br><br><br><br><br><br><br><br>
 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
-<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+
 
 {% endblock content %}

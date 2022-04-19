@@ -7,6 +7,7 @@ from . import models
 from product import models as pmodel
 from vendor import forms as vfrom
 from vendor import models as vmodel
+from deliveryman import models as dmodel
 from . import forms
 from django.contrib.auth.models import User , Group
 from django.contrib import messages
@@ -29,6 +30,16 @@ def index(request):
                 pass
             request.session['name'] = vendor.company_name
             return redirect('vendor/dashboard')
+
+    elif is_dman(request.user):
+        dman = dmodel.Delivery.objects.get(user=request.user.id)
+        if dman.status == '1':
+            try:
+                del request.session['mykey']
+            except:
+                pass
+            request.session['name'] = dman.firstname + dman.lastname
+            return redirect('dman/dashboard')
 
     elif is_guest(request.user):
         user = models.Users.objects.get(user=request.user.id)
@@ -67,7 +78,8 @@ def order(request):
             'item': qty,
             'qty':qty2,
             'total': subtotal,
-            'date':j.date
+            'date':j.date,
+            'status': 'Pending' if j.status == '0' else 'Delivered'
         }
         datalist.append(datadict)
     dict.update({'datalist':datalist})
@@ -190,6 +202,9 @@ from django.shortcuts import render,redirect,reverse
 def is_vendor(user):
     return user.groups.filter(name='VENDOR').exists()
 
+def is_dman(user):
+    return user.groups.filter(name='DELIVERY').exists()
+
 def is_guest(user):
     return user.groups.filter(name='GUEST').exists()
 
@@ -200,6 +215,13 @@ def afterlogin_view(request):
         vendor = vmodel.Vendor.objects.get(user=request.user.id)
         if vendor.status == '1':
             return HttpResponseRedirect('vendor/dashboard')
+        else:
+            return HttpResponseRedirect('logout')
+
+    if is_dman(request.user):
+        dman = dmodel.Delivery.objects.get(user=request.user.id)
+        if dman.status == '1':
+            return HttpResponseRedirect('dman/dashboard')
         else:
             return HttpResponseRedirect('logout')
 
@@ -239,6 +261,8 @@ def admin_dashboard_view(request):
     dict = {}
 
     return render(request,'admin/dashboard.html',context=dict)
+
+
 
 @login_required(login_url='adminlogin')
 def cat_details(request):
@@ -281,8 +305,34 @@ def product_details(request):
 
 @login_required(login_url='adminlogin')
 def product_orders(request):
-    order = Orders.objects.all()
-    dict ={'order':order}
+    order = models.Orders.objects.all()
+    dict = {'order': order}
+    datalist = []
+    for j in order:
+        item = json.loads(j.items_json)
+
+        subtotal = 0
+        qty = 0
+        qty2 = 0
+        for i in item:
+            id = i.split("pr")[1]
+            qty1 = item[i][0]
+            price = pmodel.Product.objects.get(id=id).price
+            total = int(qty1) * int(price)
+            qty = qty + 1
+            qty2 += qty1
+
+            subtotal = subtotal + total
+        datadict = {
+            'order_no': j.order_id,
+            'item': qty,
+            'qty': qty2,
+            'total': subtotal,
+            'date': j.date,
+            'status': 'Pending' if j.status == '0' else 'Delivered'
+        }
+        datalist.append(datadict)
+    dict.update({'datalist': datalist})
     return render(request,'admin/order-details.html',context=dict)
 
 
@@ -292,6 +342,13 @@ def vendor(request):
     dict ={'vendor':vendor}
 
     return render(request,'admin/vendor.html',context=dict)
+
+@login_required(login_url='adminlogin')
+def dman_details(request):
+    dman = dmodel.Delivery.objects.all()
+    dict ={'vendor':dman}
+
+    return render(request,'admin/delivery.html',context=dict)
 
 
 
@@ -349,6 +406,30 @@ def delete_vendor(request, pk):
     return HttpResponseRedirect('/sadmin/vendor')  # import pdb; pdb.set_trace()
 
 
+
+@login_required(login_url='adminlogin')
+def accept_dman(request, pk):
+
+    dman =  dmodel.Delivery.objects.get(id=pk)
+    dman.status = 1
+    dman.save()
+    return HttpResponseRedirect('/sadmin/dman')  # import pdb; pdb.set_trace()
+
+
+@login_required(login_url='adminlogin')
+def reject_dman(request, pk):
+    dman = dmodel.Delivery.objects.get(id=pk)
+    dman.status = 2
+    dman.save()
+    return HttpResponseRedirect('/sadmin/dman')  # import pdb; pdb.set_trace()
+
+@login_required(login_url='adminlogin')
+def delete_dman(request, pk):
+    dman = dmodel.Delivery.objects.get(id=pk)
+    dman.delete()
+    return HttpResponseRedirect('/sadmin/dman')  # import pdb; pdb.set_trace()
+
+
 @login_required(login_url='login')
 def invoice(request, pk):
     user = models.Users.objects.get(user=request.user.id)
@@ -374,6 +455,36 @@ def invoice(request, pk):
 
         datalist.append(datadict)
     dict = {'data': datalist,'user':user,'order':order,'subtotal':subtotal}
+
+
+
+    return render(request,'invoice.html',context=dict)
+
+
+@login_required(login_url='adminlogin')
+def admin_invoice(request, pk):
+    order = models.Orders.objects.get(order_id=pk)
+    item = json.loads(order.items_json)
+    datalist = []
+    subtotal = 0
+    for i in item:
+        id = i.split("pr")[1]
+        qty = item[i][0]
+        product = pmodel.Product.objects.get(id=id)
+        price = pmodel.Product.objects.get(id=id).price
+        total = int(qty)*int(price)
+        datadict = {
+            'name' : pmodel.Product.objects.get(id=id).name if pmodel.Product.objects.get(id=id).name else '',
+            'category' : pmodel.Product.objects.get(id=id).category if pmodel.Product.objects.get(id=id).category else '',
+            'price' : pmodel.Product.objects.get(id=id).price if pmodel.Product.objects.get(id=id).price else '',
+            'qty':qty,
+            'description':pmodel.Product.objects.get(id=id).description if pmodel.Product.objects.get(id=id).description else '',
+            'total': total
+        }
+        subtotal = subtotal+total
+
+        datalist.append(datadict)
+    dict = {'data': datalist,'order':order,'subtotal':subtotal}
 
 
 

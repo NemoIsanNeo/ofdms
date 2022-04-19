@@ -1,0 +1,128 @@
+{% extends 'admin/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+      a:link {
+        text-decoration: none;
+      }
+  
+      .order-card {
+        color: rgb(255, 255, 255);
+      }
+  
+      .bg-c-blue {
+        background: #04868f;
+      }
+  
+      .bg-c-green {
+        background:#4C51BF;
+      }
+  
+      .bg-c-yellow {
+        background: #F56565;
+      }
+  
+      .bg-c-pink {
+        background: #663a30;
+      }
+  
+  
+      .card {
+        
+        -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+        box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+        margin-bottom: 30px;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+      }
+  
+      .card .card-block {
+        padding: 45px;
+      }
+  
+      .order-card i {
+        font-size: 26px;
+      }
+  
+      .f-left {
+        float: left;
+      }
+  
+      .f-right {
+        float: right;
+      }
+      header {
+      left: 0px;
+      right: 0px;
+    }
+    </style>
+  </head>
+<br><br>
+        {% include 'admin/sidebar.html' %}
+
+
+  <div class="container">
+    <div class="text-center">
+        <!-- Trigger the modal with a button -->
+    </div>
+
+
+
+
+    <!-- table -->
+     <div style="margin-top: 3rem">
+         <table class="table table-bordered">
+             <thead class="thead-light">
+             <tr>
+                 <th scope="col">#</th>
+                 <th scope="col">Name</th>
+                 <th scope="col">Mobile</th>
+                 <th scope="col">Email</th>
+                 <th scope="col">Status</th>
+                 <th scope="col">Action</th>
+             </tr>
+             </thead>
+             <tbody>
+             {% for i in vendor %}
+             <tr>
+                 <th scope="row">{{ forloop.counter }}</th>
+                 <td>{{ i.get_name }}</td>
+                 <td>{{ i.mobile }}</td>
+                 <td>{{ i.user.email }}</td>
+                  <td class="text-center">{% if i.status == '0' %}<p class=" btn btn-warning">Pending</p> {% elif i.status == '1' %} <p class=" btn btn-success">Accepted</p> {% else %} <p class=" btn btn-danger">Rejected</p> {% endif %}</td>
+                 <td class="text-center">
+                     {% if i.status == '0' %}
+                         <a class="btn btn-success" href="/dman/accept/{{ i.id }}">Accept</a>
+                         <a class="btn btn-warning" href="/dman/reject/{{ i.id }}">Reject</a>
+                         <a class="btn btn-danger" href="/dman/delete/{{ i.id }}">Delete</a>
+                     {% elif i.status == '1' %}
+                         <a class="btn btn-warning" href="/dman/reject/{{ i.id }}">Reject</a>
+                         <a class="btn btn-danger" href="/dman/delete/{{ i.id }}">Delete</a>
+                     {% else %}
+                         <a class="btn btn-success" href="/dman/accept/{{ i.id }}">Accept</a>
+                         <a class="btn btn-danger" href="/dman/delete/{{ i.id }}">Delete</a>
+
+                     {% endif %}
+                 </td>
+             </tr>
+             {% endfor %}
+             </tbody>
+         </table>
+     </div>
+    <!-- table -->
+  </div>
+
+
+<br><br><br><br><br><br><br><br><br><br>
+
+<script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+
+
+{% endblock content %}

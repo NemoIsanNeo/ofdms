@@ -33,6 +33,7 @@
             <th class="unit">ITEM</th>
             <th class="qty">QUANTITY</th>
             <th class="unit">DATE</th>
+            <th class="qty">STATUS</th>
             <th class="total">TOTAL</th>
           </tr>
         </thead>
@@ -44,6 +45,7 @@
             <td class="unit">{{ i.item }}</td>
             <td class="qty">{{ i.qty }}</td>
             <td class="unit">{{ i.date }}</td>
+            <td class="qty">{{ i.status }}</td>
             <td class="total">{{ i.total }} TK</td>
           </tr>
         {% endfor %}

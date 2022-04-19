@@ -28,9 +28,9 @@
       <div id="details" class="clearfix">
         <div id="client">
           <div class="to">INVOICE TO:</div>
-          <h2 class="name">{{ user }}</h2>
-          <div class="address">{{ user.mobile }}</div>
-          <div class="email"><a href="mailto:john@example.com">{{ user.emails }}</a></div>
+          <h2 class="name">{{ order.order_by }}</h2>
+          <div class="address">{{ order.order_by.mobile }}</div>
+          <div class="email"><a href="mailto:john@example.com">{{ order.order_by.emails }}</a></div>
         </div>
         <div id="invoice">
           <h1>INVOICE #SI-{{ order.order_id }}</h1>

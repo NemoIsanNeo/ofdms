@@ -1,0 +1,49 @@
+{% extends 'index.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block body %}
+
+<div id="content" class="site-content">
+    <!-- Breadcrumb -->
+    <div id="breadcrumb">
+        <div class="container">
+            <h2 class="title">Delivery Login</h2>
+
+            <ul class="breadcrumb">
+                <li><a href="{% url 'index' %}" title="Home">Home</a></li>
+                <li><span>Login</span></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="login-page">
+            <div class="login-form form">
+                <div class="block-title">
+                    <h2 class="title"><span>Login</span></h2>
+                </div>
+
+                <form class="box" method="post">
+                    {% csrf_token %}
+
+                    {% render_field form.username class="form-control" autocomplete="off" placeholder="Username" %}
+                    {% render_field form.password class="form-control" autocomplete="off" placeholder="Password" %}
+
+                    <div class="form-group text-center">
+									<input type="submit" class="btn btn-primary" value="Sign In">
+                        <a href="/dman/register" class="btn btn-primary">Sign Up</a>
+								</div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+{% endblock body %}

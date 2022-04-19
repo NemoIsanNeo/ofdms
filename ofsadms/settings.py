@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'vendor',
     'widget_tweaks',
     'product',
-    'ckeditor'
+    'ckeditor',
+    'deliveryman',
 
 ]
 

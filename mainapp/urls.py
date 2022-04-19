@@ -19,6 +19,7 @@ urlpatterns = [path('', views.index, name='index'),path('index', views.index, na
                path('sadmin/product-details/', views.product_details, name='product-details'),
                path('sadmin/product-orders/', views.product_orders, name='product-details'),
                path('sadmin/product-category/', views.cat_details, name='product-details'),
+               path('sadmin/dman/', views.dman_details, name='dman-details'),
                path('product-category/delete/<int:pk>', views.delete_product_category, name='product-delete'),
 
                path('sadmin/vendor/', views.vendor, name='product-details'),
@@ -29,6 +30,11 @@ urlpatterns = [path('', views.index, name='index'),path('index', views.index, na
                path('vendor/accept/<int:pk>', views.accept_vendor, name='vendor-accept'),
                path('vendor/reject/<int:pk>', views.reject_vendor, name='product-reject'),
                path('vendor/delete/<int:pk>', views.delete_vendor, name='product-delete'),
+
+                path('dman/accept/<int:pk>', views.accept_dman, name='dman-accept'),
+               path('dman/reject/<int:pk>', views.reject_dman, name='dman-reject'),
+               path('dman/delete/<int:pk>', views.delete_dman, name='dman-delete'),
                path('invoice/<int:pk>', views.invoice, name='product-delete'),
+               path('sadmin/invoice/<int:pk>', views.admin_invoice, name='admin-invoice'),
 
                ]
