@@ -18,6 +18,7 @@ urlpatterns = [path('', views.index, name='index'),path('index', views.index, na
                path('admin-dashboard', views.admin_dashboard_view, name='admin-dashboard'),
                path('sadmin/product-details/', views.product_details, name='product-details'),
                path('sadmin/product-orders/', views.product_orders, name='product-details'),
+               path('sadmin/orders-report/', views.orders_report, name='product-details'),
                path('sadmin/product-category/', views.cat_details, name='product-details'),
                path('sadmin/dman/', views.dman_details, name='dman-details'),
                path('product-category/delete/<int:pk>', views.delete_product_category, name='product-delete'),
@@ -36,5 +37,7 @@ urlpatterns = [path('', views.index, name='index'),path('index', views.index, na
                path('dman/delete/<int:pk>', views.delete_dman, name='dman-delete'),
                path('invoice/<int:pk>', views.invoice, name='product-delete'),
                path('sadmin/invoice/<int:pk>', views.admin_invoice, name='admin-invoice'),
+               path('render_html',views.html_render,name='html_render'),
+               path('render_div/',views.single_div,name='render_div'),
 
                ]

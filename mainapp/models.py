@@ -39,7 +39,7 @@ class Orders(models.Model):
     status=models.CharField(max_length=111,default=0)
     payment_type=models.CharField(max_length=111,default=0)
     payment_ref=models.CharField(max_length=111,default=0)
-    date=models.CharField(max_length=111,default=0)
+    date=models.DateField()
     dman = models.ForeignKey(Delivery, on_delete=models.CASCADE, null=True)
 
     def __str__(self):

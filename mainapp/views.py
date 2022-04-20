@@ -14,6 +14,24 @@ from django.contrib.auth.models import User , Group
 from django.contrib import messages
 import json
 
+from io import BytesIO #A stream implementation using an in-memory bytes buffer
+                       # It inherits BufferIOBase
+
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+
+def render_to_pdf(template_src,context_dict={}):
+    template = get_template(template_src)
+    html  = template.render(context_dict)
+    result = BytesIO()
+
+    #This part will create the pdf.
+    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), content_type='application/pdf')
+    return None
+
 
 # Create your views here.
 
@@ -353,6 +371,84 @@ def product_orders(request):
     return render(request,'admin/order-details.html',context=dict)
 
 
+
+@login_required(login_url='adminlogin')
+def orders_report(request):
+    dtoform = DtDmanForm()
+    order = models.Orders.objects.all()
+    dict = {'order': order,'dtoform':dtoform}
+    datalist = []
+
+    for j in order:
+        item = json.loads(j.items_json)
+
+        subtotal = 0
+        qty = 0
+        qty2 = 0
+        for i in item:
+            id = i.split("pr")[1]
+            qty1 = item[i][0]
+            price = pmodel.Product.objects.get(id=id).price
+            total = int(qty1) * int(price)
+            qty = qty + 1
+            qty2 += qty1
+
+            subtotal = subtotal + total
+        datadict = {
+            'order_no': j.order_id,
+            'item': qty,
+            'qty': qty2,
+            'total': subtotal,
+            'date': j.date,
+            'status': 'Pending' if j.status == '0' else 'Delivered',
+            'dman':j.dman
+        }
+        datalist.append(datadict)
+    dict.update({'datalist': datalist})
+
+    if request.POST:
+        import datetime
+        from_date = request.POST.get('from') if request.POST.get('from') else str(datetime.datetime.today().strftime('%Y-%m-%d'))
+        to_date = request.POST.get('to') if request.POST.get('to') else str(datetime.datetime.today().strftime('%Y-%m-%d'))
+        order =models.Orders.objects.all().filter(date__gte=from_date, date__lte=to_date)
+        dict = {'order': order, 'dtoform': dtoform}
+        datalist = []
+
+        for j in order:
+            item = json.loads(j.items_json)
+
+            subtotal = 0
+            qty = 0
+            qty2 = 0
+            for i in item:
+                id = i.split("pr")[1]
+                qty1 = item[i][0]
+                price = pmodel.Product.objects.get(id=id).price
+                total = int(qty1) * int(price)
+                qty = qty + 1
+                qty2 += qty1
+
+                subtotal = subtotal + total
+            datadict = {
+                'order_no': j.order_id,
+                'item': qty,
+                'qty': qty2,
+                'total': subtotal,
+                'date': j.date,
+                'status': 'Pending' if j.status == '0' else 'Delivered',
+                'dman': j.dman
+            }
+            datalist.append(datadict)
+        dict.update({'datalist': datalist})
+
+        if request.POST.get('print'):
+            return render_to_pdf('admin/pdf.html',context_dict=dict)
+        else:
+            return render(request, 'admin/orders-report.html', context=dict)
+
+    return render(request,'admin/orders-report.html',context=dict)
+
+
 @login_required(login_url='adminlogin')
 def vendor(request):
     vendor = vmodel.Vendor.objects.all()
@@ -506,3 +602,17 @@ def admin_invoice(request, pk):
 
 
     return render(request,'invoice.html',context=dict)
+
+
+
+
+
+
+def html_render(request):
+
+    return render(request,'test.html')
+
+
+def single_div(request):
+
+    return render(request,'demodiv.html')

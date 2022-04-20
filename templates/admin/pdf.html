@@ -1,0 +1,88 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Example 1</title>
+    <link rel="stylesheet" href="style.css" media="all" />
+
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  </head>
+  <style>
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+    margin-top: 20px;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 10px;
+
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 20px!important;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 15px;
+
+}
+      #customers thead tr
+      {
+          height: 30px;
+      }
+
+  </style>
+  <body>
+    <header class="clearfix">
+        <div style="background-color:lightgrey; font-size: 18px; text-align: center">Order List</div>
+    </header>
+    <main>
+       <table id="customers" class="table table-bordered">
+             <thead class="thead-light">
+               <tr>
+            <th>#</th>
+            <th >ORDER NO</th>
+            <th >ITEM</th>
+            <th >QUANTITY</th>
+            <th >DATE</th>
+            <th >STATUS</th>
+            <th >TOTAL</th>
+                   <th>Delivery Man</th>
+          </tr>
+             </thead>
+             <tbody>
+             {% for i in datalist %}
+          <tr>
+            <td class="no">{{ forloop.counter }}</td>
+            <td class="desc"><a href="/sadmin/invoice/{{ i.order_no }}"><strong>#SI-{{ i.order_no }}</strong></a></td>
+            <td class="unit">{{ i.item }}</td>
+            <td class="qty">{{ i.qty }}</td>
+            <td class="unit">{{ i.date }}</td>
+            <td class="qty">{{ i.status }}</td>
+            <td class="total">{{ i.total }} TK</td>
+            <td class="total">{% if i.dman %}{{ i.dman }}{% else %}Not Assigned{% endif %}</td>
+          </tr>
+        {% endfor %}
+             </tbody>
+         </table>
+      <div id="notices">
+      </div>
+    </main>
+    <footer>
+    </footer>
+  </body>
+</html>
