@@ -235,7 +235,7 @@ def afterlogin_view(request):
         if vendor.status == '1':
             return HttpResponseRedirect('vendor/dashboard')
         else:
-            return HttpResponseRedirect('logout')
+            return render(request,'vendor/login.html',{'error':"Wait for admin approval......."})
 
     if is_dman(request.user):
         dman = dmodel.Delivery.objects.get(user=request.user.id)
