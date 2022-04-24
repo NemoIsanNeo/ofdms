@@ -13,4 +13,4 @@ class GUserForm(forms.ModelForm):
 class GForm(forms.ModelForm):
     class Meta:
         model=models.Users
-        fields=['mobile','first_name','last_name']
+        fields=['mobile','first_name','last_name','address']

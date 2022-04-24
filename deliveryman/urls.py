@@ -8,6 +8,9 @@ urlpatterns = [
                path('dashboard/', views.dashboard, name='dman_dashboard'),
                path('product-details/', views.product_details, name='vendor_dashboard'),
                path('product-edit/<int:pk>', views.edit, name='edit'),
-               path('order-details', views.product_orders, name='edit'),
+               path('accepted/<int:pk>', views.accept_order, name='accept'),
+               path('rejected/<int:pk>', views.reject_order, name='reject'),
+               path('delivered/<int:pk>', views.delivered_order, name='deliver'),
+               path('order-details', views.product_orders, name='orrder_details1'),
 
 ]

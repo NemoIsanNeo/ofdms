@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from . import models, forms
 from product import models as pmodel
-
+from mainapp import models as mmodel
 from django.contrib.auth.models import User, Group
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required,user_passes_test
@@ -42,7 +42,7 @@ def dashboard(request):
 
 
 
-@login_required(login_url='vendor/login')
+@login_required(login_url='delivery/login')
 @user_passes_test(is_dman)
 def product_details(request):
     product_form = forms.ProductAddForm()
@@ -62,7 +62,7 @@ def product_details(request):
     return render(request,'vendor/product-details.html',context=dict)
 
 
-@login_required(login_url='vendor/login')
+@login_required(login_url='delivery/login')
 @user_passes_test(is_dman)
 def edit(request, pk):
     instance = pmodel.Product.objects.get(id=pk)
@@ -81,7 +81,7 @@ def edit(request, pk):
 
 
 
-@login_required(login_url='vendor/login')
+@login_required(login_url='delivery/login')
 @user_passes_test(is_dman)
 def product_orders(request):
     from mainapp.models import Orders
@@ -105,16 +105,59 @@ def product_orders(request):
             qty2 += qty1
 
             subtotal = subtotal + total
+
+        if j.status == '0':
+            status = 'Pending'
+        elif j.status == '1':
+            status = 'Accepted'
+        elif j.status == '2':
+            status = 'Rejected'
+        else:
+            status = 'Delivered'
         datadict = {
             'order_no': j.order_id,
             'item': qty,
             'qty': qty2,
             'total': subtotal,
             'date': j.date,
-            'status': 'Pending' if j.status == '0' else 'Delivered',
+            'status': status
         }
         datalist.append(datadict)
     dict.update({'datalist': datalist})
 
 
     return render(request,'delivery/order-details.html',context=dict)
+
+
+
+
+
+
+
+@login_required(login_url='delivery/login')
+@user_passes_test(is_dman)
+def accept_order(request, pk):
+
+    order =  mmodel.Orders.objects.get(order_id=pk)
+    order.status = 1
+    order.save()
+    return HttpResponseRedirect('/dman/order-details')  # import pdb; pdb.set_trace()
+
+
+@login_required(login_url='delivery/login')
+@user_passes_test(is_dman)
+def reject_order(request, pk):
+    order =  mmodel.Orders.objects.get(order_id=pk)
+    order.status = 2
+    order.save()
+    return HttpResponseRedirect('/dman/order-details')  # import pdb; pdb.set_trace()
+
+
+@login_required(login_url='delivery/login')
+@user_passes_test(is_dman)
+def delivered_order(request, pk):
+    order =  mmodel.Orders.objects.get(order_id=pk)
+    order.status = 3
+    order.save()
+
+    return HttpResponseRedirect('/dman/order-details')  # import pdb; pdb.set_trace()

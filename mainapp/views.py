@@ -66,7 +66,7 @@ def index(request):
             del request.session['name']
         except:
             pass
-        request.session['name'] = user.first_name + user.last_name
+        request.session['name'] = user.first_name+ " " + user.last_name
 
         return render(request, 'index.html', context=dict)
 
@@ -92,13 +92,23 @@ def order(request):
             qty2 += qty1
 
             subtotal = subtotal + total
+
+        if j.status == '0':
+            status = 'Pending'
+        elif j.status == '1':
+            status = 'Picked Up'
+        elif j.status == '2':
+            status = 'Rejected'
+        else:
+            status = 'Delivered'
+
         datadict = {
             'order_no': j.order_id,
             'item': qty,
             'qty':qty2,
             'total': subtotal,
             'date':j.date,
-            'status': 'Pending' if j.status == '0' else 'Delivered'
+            'status': status
         }
         datalist.append(datadict)
     dict.update({'datalist':datalist})
@@ -136,8 +146,17 @@ def register(request):
 def account(request):
     if is_guest(request.user):
         user = models.Users.objects.get(user=request.user.id)
-        dict = {'user': user}
-        return render(request, 'account.html', context=dict)
+
+        userForm = forms.GUserForm(instance=request.user)
+        gfrom = forms.GForm(instance=user)
+        mydict = {'userForm': userForm, 'gfrom': gfrom, 'error': None,'user': user}
+        if request.method == 'POST':
+            gfrom = forms.GForm(request.POST, instance=request.user.users)
+            if gfrom.is_valid():
+                gfrom.save()
+            return HttpResponseRedirect('/account')
+
+        return render(request, 'account.html', context=mydict)
 
     else:
         redirect('index')
@@ -207,8 +226,45 @@ def checkout(request):
 
 
 
-def food_list(request):
-    return render(request, 'food_list.html')
+def food_list(request,pk):
+    cat = True
+
+    product =  pmodel.Product.objects.all().filter(status=1,category=pk)
+    category = pmodel.ProductCategory.objects.all()
+
+    dict = {'product':product,'category':category,'cat':cat}
+    if is_vendor(request.user):
+        vendor = vmodel.Vendor.objects.get(user=request.user.id)
+        if vendor.status == '1':
+            try:
+                del request.session['mykey']
+            except:
+                pass
+            request.session['name'] = vendor.company_name
+            return redirect('vendor/dashboard')
+
+    elif is_dman(request.user):
+        dman = dmodel.Delivery.objects.get(user=request.user.id)
+        if dman.status == '1':
+            try:
+                del request.session['mykey']
+            except:
+                pass
+            request.session['name'] = dman.firstname + dman.lastname
+            return redirect('dman/dashboard')
+
+    elif is_guest(request.user):
+        user = models.Users.objects.get(user=request.user.id)
+        try:
+            del request.session['name']
+        except:
+            pass
+        request.session['name'] = user.first_name+ " " + user.last_name
+
+        return render(request, 'index.html', context=dict)
+
+    return render(request, 'index.html',context=dict)
+
 
 
 def food_details(request):
@@ -355,7 +411,9 @@ def product_orders(request):
             'total': subtotal,
             'date': j.date,
             'status': 'Pending' if j.status == '0' else 'Delivered',
-            'dman':j.dman
+            'dman':j.dman,
+            'ptype': 'Cash On' if j.payment_type == '1' else 'Bkash',
+            'pref': j.payment_ref if j.payment_ref !='0' else 'No Bkash'
         }
         datalist.append(datadict)
     dict.update({'datalist': datalist})
@@ -394,13 +452,23 @@ def orders_report(request):
             qty2 += qty1
 
             subtotal = subtotal + total
+
+        if j.status == '0':
+            status = 'Pending'
+        elif j.status == '1':
+            status = 'Picked Up'
+        elif j.status == '2':
+            status = 'Rejected'
+        else:
+            status = 'Delivered'
+
         datadict = {
             'order_no': j.order_id,
             'item': qty,
             'qty': qty2,
             'total': subtotal,
             'date': j.date,
-            'status': 'Pending' if j.status == '0' else 'Delivered',
+            'status': status,
             'dman':j.dman
         }
         datalist.append(datadict)

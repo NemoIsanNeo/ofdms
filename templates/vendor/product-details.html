@@ -148,7 +148,7 @@
                  <td>{{ i.name }}</td>
                  <td>{{ i.category }}</td>
                  <td>{{ i.price }} TK</td>
-                 <td class="text-center">{% if i.status == '0' %}<p class=" btn btn-warning">Pending</p> {% endif %}</td>
+                 <td class="text-center">{% if i.status == '0' %}<p class=" btn btn-warning">Pending</p> {% else %} <p class=" btn btn-success">Accepted</p> {% endif %}</td>
                  <td class="text-center"><a href="/vendor/product-edit/{{ i.id }}"><i class="fas fa-edit"></i></a> <a href=""><i class="fas fa-trash-alt"></i></a></td>
 
              </tr>

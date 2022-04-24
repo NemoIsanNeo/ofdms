@@ -1,10 +1,16 @@
 from django.shortcuts import render
+
+from deliveryman.forms import DtDmanForm
 from . import models, forms
 from product import models as pmodel
+from mainapp import models as mmodel
 
 from django.contrib.auth.models import User, Group
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required,user_passes_test
+import json
+from deliveryman import models as dmodel
+
 
 
 
@@ -37,7 +43,11 @@ def is_vendor(user):
 @login_required(login_url='vendor/login')
 @user_passes_test(is_vendor)
 def dashboard(request):
-    dict ={}
+    product = pmodel.Product.objects.all().filter(created_by=models.Vendor.objects.get(user=request.user.id)).count()
+    p_product = pmodel.Product.objects.all().filter(created_by=models.Vendor.objects.get(user=request.user.id), status=0).count()
+
+
+    dict ={'product':product, 'p_product':p_product}
     return render(request,'vendor/dashboard.html',context=dict)
 
 
@@ -78,4 +88,54 @@ def edit(request, pk):
             return HttpResponseRedirect('/vendor/product-details')
 
     return render(request, 'vendor/edit-product.html', context=dict)
+
+
+
+
+@login_required(login_url='vendor/login')
+@user_passes_test(is_vendor)
+def product_orders(request):
+    dtoform = DtDmanForm()
+    order = mmodel.Orders.objects.all().filter()
+    dict = {'order': order,'dtoform':dtoform}
+    datalist = []
+
+    for j in order:
+        item = json.loads(j.items_json)
+
+        subtotal = 0
+        qty = 0
+        qty2 = 0
+        for i in item:
+            id = i.split("pr")[1]
+            qty1 = item[i][0]
+            price = pmodel.Product.objects.get(id=id).price
+            total = int(qty1) * int(price)
+            name = pmodel.Product.objects.get(id=id).name
+            vendor = pmodel.Product.objects.get(id=id).created_by
+            if vendor == models.Vendor.objects.get(user_id=request.user.pk):
+                datadict = {
+                    'order_no': j.order_id,
+                    'product_name': name,
+                    'qty': qty1,
+                    'total': total,
+                    'date': j.date,
+                    'status': 'Pending' if j.status == '0' else 'Delivered',
+                    'dman': j.dman,
+                }
+                datalist.append(datadict)
+
+
+    dict.update({'datalist': datalist})
+
+    if request.POST:
+        order_form = DtDmanForm(request.POST)
+        if order_form.is_valid():
+            order = models.Orders.objects.get(order_id=request.POST.get('order_id'))
+            order.dman = dmodel.Delivery.objects.get(id=request.POST.get('dman_id'))
+            order.save()
+
+
+    return render(request,'vendor/order-details.html',context=dict)
+
 

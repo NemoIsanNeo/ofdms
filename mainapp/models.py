@@ -8,6 +8,7 @@ class Users(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=20, null=False)
     last_name = models.CharField(max_length=20, null=False)
+    address = models.CharField(max_length=20, null=True)
     mobile = models.CharField(max_length=20, null=False)
     status = models.CharField(max_length=20, null=False, default=0)
 
@@ -20,7 +21,7 @@ class Users(models.Model):
         return self
 
     def __str__(self):
-        return self.first_name + self.last_name
+        return self.first_name +" "+ self.last_name
 
 
 

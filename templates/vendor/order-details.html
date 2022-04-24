@@ -1,4 +1,4 @@
-{% extends 'admin/base.html' %}
+{% extends 'vendor/base.html' %}
 {% load widget_tweaks %}
 {% load static %}
 {% block content %}
@@ -78,7 +78,6 @@
   </head>
 <br><br>
 
-    {% include 'admin/sidebar.html' %}
 
   <div class="container-fluid">
     <div class="text-center">
@@ -90,19 +89,6 @@
 
   <!-- Modal -->
 
-  <form method="POST" autocomplete="off" style="margin:100px;margin-top: 0px;">
-    {%csrf_token%}
-    <div class="form-group">
-        <label for="course_name">Delivery Man Name</label>
-      {% render_field dtoform.dman_id class="form-control" placeholder="Select Delivery Man" %}
-                <label for="course_name">Order</label>
-
-      {% render_field dtoform.order_id class="form-control" placeholder="Select Order" %}
-    </div>
-
-
-    <button type="submit" class="btn btn-success" style="border-radius:0px;">Assign Delivery To Delivery Man</button>
-  </form>
 
     <!-- table -->
      <div style="margin-top: 3rem">
@@ -111,11 +97,10 @@
                <tr>
             <th>#</th>
             <th >ORDER NO</th>
-            <th >ITEM</th>
+            <th >PRODUCT NAME</th>
             <th >QUANTITY</th>
             <th >DATE</th>
-            <th >PAYMENT ON</th>
-            <th >BKASH REF</th>
+
             <th >STATUS</th>
             <th >TOTAL</th>
                    <th>Delivery Man</th>
@@ -125,12 +110,11 @@
              {% for i in datalist %}
           <tr>
             <td class="no">{{ forloop.counter }}</td>
-            <td class="desc"><a href="/sadmin/invoice/{{ i.order_no }}"><strong>#SI-{{ i.order_no }}</strong></a></td>
-            <td class="unit">{{ i.item }}</td>
+            <td class="desc"><strong>#SI-{{ i.order_no }}</strong></td>
+            <td class="unit">{{ i.product_name }}</td>
             <td class="qty">{{ i.qty }}</td>
             <td class="unit">{{ i.date }}</td>
-            <td class="unit">{{ i.ptype }}</td>
-            <td class="unit">{{ i.pref }}</td>
+
             <td class="qty">{{ i.status }}</td>
             <td class="total">{{ i.total }} TK</td>
             <td class="total">{% if i.dman %}{{ i.dman }}{% else %}Not Assigned{% endif %}</td>

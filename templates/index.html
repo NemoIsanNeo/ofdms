@@ -60,6 +60,7 @@
         <!-- Main Content -->
         <div id="content" class="site-content">
             <!-- Slideshow -->
+        {% if not cat %}
             <div class="section slideshow">
                 <div class="container">
                     <div class="tiva-slideshow-wrapper">
@@ -142,6 +143,7 @@
                     </div>
                 </div>
             </div>
+        {% endif %}
 
             <!--products-->
             <div class="container" style="margin-top: 20px">
@@ -207,7 +209,7 @@
                                                     <div class="product-item">
                                                         <div class="product-image">
                                                             <a href="{% url 'food_details' %}">
-                                                                <div style="background-image: url('media/{{ i.image }}'); background-repeat: no-repeat; background-size: cover; background-position: 50%; height:200px; width:100%; )">
+                                                                <div style="background-image: url('/media/{{ i.image }}'); background-repeat: no-repeat; background-size: cover; background-position: 50%; height:200px; width:100%; )">
 
                                                                 </div>
 

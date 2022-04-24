@@ -31,6 +31,7 @@
           <h2 class="name">{{ order.order_by }}</h2>
           <div class="address">{{ order.order_by.mobile }}</div>
           <div class="email"><a href="mailto:john@example.com">{{ order.order_by.emails }}</a></div>
+          <div class="address">{{ order.address }} , {{ order.city }},{{ order.state }}-{{ order.zip_code }}</div>
         </div>
         <div id="invoice">
           <h1>INVOICE #SI-{{ order.order_id }}</h1>

@@ -102,6 +102,7 @@
             <th >DATE</th>
             <th >STATUS</th>
             <th >TOTAL</th>
+            <th >ACTION</th>
           </tr>
              </thead>
              <tbody>
@@ -114,6 +115,24 @@
             <td class="unit">{{ i.date }}</td>
             <td class="qty">{{ i.status }}</td>
             <td class="total">{{ i.total }} TK</td>
+          <td>
+              {% if i.status == 'Pending' %}
+                  <a href="/dman/accepted/{{ i.order_no }}" class="btn btn-info">Accept</a>
+                  <a href="/dman/rejected/{{ i.order_no }}" class="btn btn-danger">Reject</a>
+                  <a href="/dman/delivered/{{ i.order_no }}" class="btn btn-success">Deliver</a>
+              {% endif %}
+
+            {% if i.status == 'Accepted' %}
+                  <a href="/dman/rejected/{{ i.order_no }}" class="btn btn-danger">Reject</a>
+                  <a href="/dman/delivered/{{ i.order_no }}" class="btn btn-success">Deliver</a>
+              {% endif %}
+
+            {% if i.status == 'Rejected' %}
+                  <a href="/dman/accepted/{{ i.order_no }}" class="btn btn-info">Accept</a>
+              {% endif %}
+
+
+          </td>
           </tr>
         {% endfor %}
              </tbody>

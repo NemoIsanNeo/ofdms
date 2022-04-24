@@ -1,3 +1,8 @@
+#popbar
+{
+    max-height: 400px;
+    overflow: scroll;
+}
 [class~="nav"] > li > a:focus,
 [class~="nav"] > li > a:hover {
     background: none;
